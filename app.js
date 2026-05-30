@@ -2853,6 +2853,13 @@ function setupEventListeners() {
       });
     });
   <\/script>
+
+  <!-- Viral Growth Footer -->
+  <div style="text-align:center; padding:16px; background:#f8fafc; border-top:1px solid #e2e8f0;">
+    <a href="https://aigw2026-cpu.github.io/landing-page-builder/" target="_blank" style="color:#6366f1; font-size:12px; text-decoration:none; font-family:system-ui; display:inline-flex; align-items:center; gap:6px;">
+      ⚡ Built with <strong>AutoWork Landing Builder</strong> — 무료로 나만의 랜딩페이지 만들기
+    </a>
+  </div>
 </body>
 </html>`;
 

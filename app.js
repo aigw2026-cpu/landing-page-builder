@@ -1,3 +1,16 @@
+// Utility: Sanitize HTML to prevent XSS in user-editable fields
+function sanitizeHTML(str) {
+  if (typeof str !== 'string') return str;
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Utility: Debounce function to limit rapid re-renders during fast typing
+let _previewDebounceTimer = null;
+function debouncedUpdatePreview() {
+  clearTimeout(_previewDebounceTimer);
+  _previewDebounceTimer = setTimeout(() => updatePreview(), 150);
+}
+
 // components registry containing default properties, schema fields, and Tailwind render functions
 const COMPONENT_REGISTRY = {
   Header_Basic: {
@@ -1905,7 +1918,7 @@ function renderVisualPropertyForm() {
       input.value = val || "";
       input.addEventListener("input", (e) => {
         props[key] = e.target.value;
-        updatePreview();
+        debouncedUpdatePreview();
       });
       formGroup.appendChild(input);
     } 
@@ -1915,7 +1928,7 @@ function renderVisualPropertyForm() {
       textarea.value = val || "";
       textarea.addEventListener("input", (e) => {
         props[key] = e.target.value;
-        updatePreview();
+        debouncedUpdatePreview();
       });
       formGroup.appendChild(textarea);
     } 
@@ -1979,7 +1992,7 @@ function renderVisualPropertyForm() {
             subInput.value = subVal || "";
             subInput.addEventListener("input", (e) => {
               item[sKey] = e.target.value;
-              updatePreview();
+              debouncedUpdatePreview();
             });
             subGroup.appendChild(subInput);
           } else if (subField.type === "textarea") {
@@ -1991,7 +2004,7 @@ function renderVisualPropertyForm() {
             subTextarea.value = subVal || "";
             subTextarea.addEventListener("input", (e) => {
               item[sKey] = e.target.value;
-              updatePreview();
+              debouncedUpdatePreview();
             });
             subGroup.appendChild(subTextarea);
           } else if (subField.type === "select") {
@@ -2259,10 +2272,15 @@ function setupEventListeners() {
   });
 
   // Copy code from Modal
-  btnCopyCode.addEventListener("click", () => {
-    exportCodeTextarea.select();
-    document.execCommand("copy");
-    showToast("클립보드에 복사되었습니다!");
+  btnCopyCode.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(exportCodeTextarea.value);
+      showToast("클립보드에 복사되었습니다!");
+    } catch {
+      exportCodeTextarea.select();
+      document.execCommand("copy");
+      showToast("클립보드에 복사되었습니다!");
+    }
   });
 
   // Download code as file

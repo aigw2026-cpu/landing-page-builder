@@ -1616,270 +1616,59 @@ const COMPONENT_REGISTRY = {
   }
 };
 
-// Preset Templates list
 const PRESET_TEMPLATES = {
   autowork: {
-    name: "AutoWork AI 기본",
-    desc: "AI 기반 업무 자동화 랜딩 페이지",
+    name: "💰 AutoWork AI 수익형",
+    desc: "실제 전환과 매출을 만드는 16블록 최적화 구성",
     blocks: [
+      {
+        component: "Urgency_Banner",
+        props: {
+          preText: "🔥 론칭 기념 한정 프로모션",
+          headline: "지금 가입하면 첫 3개월 50% 할인 + 전담 온보딩 무료",
+          subText: "프로모션 종료까지 남은 시간",
+          ctaText: "할인가로 시작하기 →",
+          ctaUrl: "#pricing",
+          endDate: "2026-06-30T23:59:59",
+          bgGradient: "from-rose-600 via-pink-600 to-violet-600"
+        }
+      },
       {
         component: "Header_Basic",
         props: {
           logoText: "AutoWork AI",
           navLinks: [
-            { label: "기능 소개", url: "#features" },
-            { label: "도입 사례", url: "#testimonials" },
+            { label: "도입 효과", url: "#roi" },
+            { label: "기능", url: "#features" },
+            { label: "고객 후기", url: "#testimonials" },
             { label: "요금제", url: "#pricing" }
           ],
-          ctaButtonText: "무료 상담 신청"
-        }
-      },
-      {
-        component: "Hero_Type_A",
-        props: {
-          title: "단순 반복 업무,\n이제 AI에게 맡기세요",
-          subtitle: "팀이 더 가치 있는 일에 집중할 수 있도록 복잡한 비즈니스 로직을 자동화하는 최적의 솔루션을 제공합니다.",
-          primaryButtonText: "14일 무료 체험하기",
-          secondaryButtonText: "데모 영상 보기",
-          bgColor: "bg-indigo-50/40"
-        }
-      },
-      {
-        component: "Features_Grid",
-        props: {
-          sectionBadge: "강력한 핵심 기능",
-          sectionTitle: "스마트한 인공지능이 업무를 혁신합니다",
-          sectionDesc: "더 복잡하고 까다로운 스케줄링 업무도 간단한 워크플로우 드래그를 통해 완벽하게 해결합니다.",
-          features: [
-            { icon: "⚡", title: "실시간 업무 동기화", desc: "사용 중인 협업 툴(Slack, Jira, Teams)과 플러그인 연동을 통해 이벤트를 실시간 모니터링합니다." },
-            { icon: "🤖", title: "지능형 시나리오 구성", desc: "자연어로 원하는 시나리오를 설명하면, AI가 최적의 실행 흐름을 자동 구축합니다." },
-            { icon: "📈", title: "자동 시각 분석 보고서", desc: "매주/매월 말에 생성되는 복잡한 업무 성과 데이터를 대시보드 리포트로 즉시 변환합니다." }
-          ]
-        }
-      },
-      {
-        component: "CTA_Banner",
-        props: {
-          headline: "업무 혁신, 더 이상 미루지 마세요.",
-          subheadline: "불필요한 반복 행위를 정리하고 혁신적인 가치를 만드는 작업에만 에너지를 집중하세요.",
-          buttonText: "전문가와 도입 상담하기",
-          bgColor: "bg-indigo-600"
-        }
-      },
-      {
-        component: "Footer_Simple",
-        props: {
-          logoText: "AutoWork AI",
-          copyrightText: "© 2026 AutoWork AI Inc. All rights reserved.",
-          links: [
-            { label: "이용약관", url: "#" },
-            { label: "개인정보처리방침", url: "#" },
-            { label: "고객지원", url: "#" }
-          ]
-        }
-      }
-    ]
-  },
-  saas: {
-    name: "SaaS 스타트업",
-    desc: "고도화된 8개 블록으로 이루어진 세일즈용 템플릿",
-    blocks: [
-      {
-        component: "Header_Basic",
-        props: {
-          logoText: "CloudFlow AI",
-          navLinks: [
-            { label: "특장점", url: "#features" },
-            { label: "요금 안내", url: "#pricing" }
-          ],
-          ctaButtonText: "지금 가입하기"
+          ctaButtonText: "14일 무료 체험"
         }
       },
       {
         component: "Hero_Type_Gradient",
         props: {
-          title: "성공적인 비즈니스를 위한\n원스톱 AI 오토메이션",
-          subtitle: "수작업 데이터 수집, 중복 문서 검토, 리포트 작성을 하나의 파이프라인으로 구축하세요.",
-          primaryButtonText: "무료로 시작하기",
-          secondaryButtonText: "자세히 알아보기",
+          title: "반복 업무에 쓰는 하루 3시간,\nAI가 3분으로 줄여드립니다",
+          subtitle: "국내 1,200개 기업이 선택한 No.1 업무 자동화 플랫폼. 코딩 없이 5분 만에 첫 자동화를 만들고, 팀 생산성을 즉시 78% 향상시키세요.",
+          primaryButtonText: "14일 무료 체험 시작 →",
+          secondaryButtonText: "3분 데모 영상 보기",
           gradientFrom: "from-slate-900",
           gradientTo: "to-indigo-950"
         }
       },
       {
-        component: "Stats_Banner",
-        props: {
-          bgColor: "bg-indigo-600",
-          stats: [
-            { value: "99.8%", label: "자동화 성공률" },
-            { value: "15,000+", label: "글로벌 협업 팀" },
-            { value: "3.2억", label: "누적 절약 시간 (시)" },
-            { value: "48%", label: "평균 개발 비용 절감" }
-          ]
-        }
-      },
-      {
-        component: "Features_Grid",
-        props: {
-          sectionBadge: "핵심 요약 기능",
-          sectionTitle: "속도, 신뢰성 그리고 뛰어난 보안성",
-          sectionDesc: "비즈니스에 필수적인 핵심 기능을 완벽하게 지원합니다.",
-          features: [
-            { icon: "🛡️", title: "군용 급 보안 솔루션", desc: "모든 정보가 암호화 프로토콜을 통과하여, 중요 내부 핵심 보안 문서도 완벽하게 수호됩니다." },
-            { icon: "⚡", title: "초고속 동기화 스피드", desc: "지연 시간이 없는 고속 엔진을 통해 0.1초 이내에 트리거 실행이 이루어집니다." },
-            { icon: "💡", title: "쉬운 대시보드 관리", desc: "드래그 앤 드롭 편집기로 직관적인 프로세스 확인과 운영 현황이 한눈에 파악됩니다." }
-          ]
-        }
-      },
-      {
-        component: "Testimonials_Grid",
-        props: {
-          sectionTitle: "실제 고객들의 추천 이야기",
-          sectionDesc: "더 이상 단순 노가다 작업에 시간 낭비하지 않는 비즈니스 오피스의 생생한 후기.",
-          testimonials: [
-            { avatar: "👩‍💻", name: "김민재", role: "토스 개발 리드", quote: "매일 아침 1시간 넘게 걸리던 에러 리포트 수집 및 분류 작업이 AutoWork 도입 후 1분 만에 자동으로 완료됩니다." },
-            { avatar: "👨‍💼", name: "최우식", role: "라인 운영 총괄", quote: "연동 플러그인이 풍부해서 도입 3일 만에 기존 인프라 전체 연동이 가능했습니다. 완벽해요." },
-            { avatar: "💎", name: "윤아름", role: "스타트업 CEO", quote: "업무 생산성 향상 비율이 약 300% 이상 뛰었습니다. 필수 소프트웨어입니다." }
-          ]
-        }
-      },
-      {
-        component: "Pricing_Three_Tier",
-        props: {
-          sectionTitle: "합리적인 가격 구성",
-          sectionDesc: "비즈니스의 규모와 용량에 맞춰 최적의 비용 플랜을 만나보세요.",
-          plans: [
-            { name: "스타터 플랜", price: "₩29,000", period: "월", features: "기본 자동화 플로우 10개, 월 실행 횟수 5,000회, 슬랙/디스코드 연동, 1인 관리 담당자", buttonText: "스타터 무료 시작", isPopular: false },
-            { name: "프로 플랜", price: "₩89,000", period: "월", features: "제한 없는 자동화 플로우, 월 실행 횟수 50,000회, 지연 없는 실행 속도, 연동 툴 전체 지원, 24시간 우선 지원", buttonText: "프로 무료 체험 신청", isPopular: true },
-            { name: "엔터프라이즈", price: "별도 문의", period: "연", features: "실행 횟수 무제한, 사내망(온프레미스) 구축 가능, 전담 어카운트 매니저 배정, 커스텀 API 통합 설계", buttonText: "도입 관련 상담 요청", isPopular: false }
-          ]
-        }
-      },
-      {
-        component: "FAQ_Accordion",
-        props: {
-          sectionTitle: "자주 묻는 질문",
-          faqs: [
-            { question: "코딩을 전혀 모르는 비개발자도 정말 사용할 수 있나요?", answer: "코딩을 몰라도 자연어 설명 방식으로 프로세스를 완벽 설계 가능합니다." },
-            { question: "결제 취소 절차는 어떻게 되나요?", answer: "설정 창에서 한 번의 클릭만으로 언제든 취소 및 해지가 가능합니다." }
-          ]
-        }
-      },
-      {
-        component: "Footer_Simple",
-        props: {
-          logoText: "CloudFlow AI",
-          copyrightText: "© 2026 CloudFlow AI Inc. All rights reserved.",
-          links: [
-            { label: "개인정보보호", url: "#" },
-            { label: "도움말", url: "#" }
-          ]
-        }
-      }
-    ]
-  },
-  marketing: {
-    name: "🚀 마케팅 최적화 풀스택",
-    desc: "전환율 극대화를 위한 캐러셀 + 소셜 증거 + 비교표 + 뉴스레터",
-    blocks: [
-      {
-        component: "Header_Basic",
-        props: {
-          logoText: "GrowthEngine AI",
-          navLinks: [
-            { label: "기능", url: "#features" },
-            { label: "고객 후기", url: "#reviews" },
-            { label: "요금제", url: "#pricing" },
-            { label: "뉴스레터", url: "#newsletter" }
-          ],
-          ctaButtonText: "지금 바로 시작"
-        }
-      },
-      {
-        component: "Hero_Type_Gradient",
-        props: {
-          title: "매출을 2배로 만드는\nAI 마케팅 자동화 플랫폼",
-          subtitle: "고객 획득부터 유지까지, 모든 마케팅 퍼널을 AI가 자동 최적화합니다. 500개 이상의 기업이 이미 도입했습니다.",
-          primaryButtonText: "14일 무료 체험 →",
-          secondaryButtonText: "제품 데모 보기",
-          gradientFrom: "from-violet-950",
-          gradientTo: "to-slate-900"
-        }
-      },
-      {
-        component: "Card_News_Carousel",
-        props: {
-          sectionBadge: "왜 GrowthEngine인가?",
-          sectionTitle: "이런 불편함, 더 이상 겪지 마세요",
-          sectionDesc: "많은 마케팅 팀이 겪고 있는 비효율의 원인과 GrowthEngine의 해결책을 카드뉴스로 확인하세요.",
-          autoPlaySpeed: 5000,
-          ctaUrl: "#pricing",
-          cards: [
-            {
-              painIcon: "😩",
-              painTitle: "캠페인 기획에만 2주가 걸려요",
-              painDesc: "타겟 설정, 크리에이티브 제작, 채널 배분까지... 하나의 캠페인을 기획하는 데 너무 많은 시간과 리소스가 소모됩니다.",
-              solveIcon: "🚀",
-              solveTitle: "AI가 15분 만에 캠페인 완성",
-              solveDesc: "목표만 입력하면 AI가 타겟 세그먼트, 메시지, 최적 채널까지 자동으로 추천하고 실행합니다.",
-              ctaText: "캠페인 자동화 체험 →",
-              gradient: "from-rose-500 to-orange-400"
-            },
-            {
-              painIcon: "📊",
-              painTitle: "어떤 광고가 효과적인지 모르겠어요",
-              painDesc: "광고비는 나가는데 어떤 채널, 어떤 메시지가 실제 매출로 이어지는지 파악이 어렵습니다.",
-              solveIcon: "🎯",
-              solveTitle: "채널별 ROAS 실시간 추적",
-              solveDesc: "모든 터치포인트의 성과를 실시간으로 추적하고, AI가 예산 재분배를 자동으로 추천합니다.",
-              ctaText: "ROAS 대시보드 보기 →",
-              gradient: "from-blue-500 to-cyan-400"
-            },
-            {
-              painIcon: "🤯",
-              painTitle: "고객이 이탈하는데 원인을 모르겠어요",
-              painDesc: "가입은 했지만 활성화되지 않는 유저, 구매 후 재방문하지 않는 고객... 이탈 패턴을 파악할 수 없습니다.",
-              solveIcon: "🔮",
-              solveTitle: "AI 이탈 예측 & 자동 리텐션",
-              solveDesc: "이탈 확률 90%인 고객을 사전에 식별하고, 맞춤 리텐션 메시지를 자동으로 발송합니다.",
-              ctaText: "이탈 방지 시스템 도입 →",
-              gradient: "from-violet-500 to-purple-400"
-            },
-            {
-              painIcon: "⏰",
-              painTitle: "A/B 테스트 결과를 기다리느라 지쳐요",
-              painDesc: "수동으로 실험을 설계하고 2주를 기다려 결과를 분석... 시장은 빠르게 변하는데 속도가 따라가지 못합니다.",
-              solveIcon: "⚡",
-              solveTitle: "AI 멀티 실험 자동 최적화",
-              solveDesc: "동시에 10개 이상의 실험을 자동 실행하고, 통계적으로 유의미한 승자를 실시간으로 적용합니다.",
-              ctaText: "자동 최적화 시작 →",
-              gradient: "from-emerald-500 to-teal-400"
-            },
-            {
-              painIcon: "💸",
-              painTitle: "개인화 메시지를 보내고 싶은데 인력이 부족해요",
-              painDesc: "고객마다 다른 메시지를 보내야 하는 건 알지만, 수천 명의 고객을 일일이 관리할 인력이 없습니다.",
-              solveIcon: "🤖",
-              solveTitle: "AI 초개인화 메시징 엔진",
-              solveDesc: "고객의 행동 데이터를 기반으로 1:1 맞춤 메시지를 자동 생성하고 최적 시점에 발송합니다.",
-              ctaText: "개인화 메시징 체험 →",
-              gradient: "from-amber-500 to-yellow-400"
-            }
-          ]
-        }
-      },
-      {
         component: "Logo_Carousel",
         props: {
-          sectionLabel: "500+ 기업이 신뢰하는 마케팅 파트너",
+          sectionLabel: "1,200+ 기업이 신뢰하는 업무 자동화 파트너",
           logos: [
-            { name: "Samsung", emoji: "🔵" },
-            { name: "Naver", emoji: "🟢" },
-            { name: "Kakao", emoji: "🟡" },
-            { name: "Toss", emoji: "🔷" },
-            { name: "LINE", emoji: "🟩" },
-            { name: "Coupang", emoji: "🟠" },
-            { name: "Hyundai", emoji: "🔹" },
+            { name: "삼성전자", emoji: "🔵" },
+            { name: "네이버", emoji: "🟢" },
+            { name: "카카오", emoji: "🟡" },
+            { name: "토스", emoji: "🔷" },
+            { name: "라인", emoji: "🟩" },
+            { name: "쿠팡", emoji: "🟠" },
+            { name: "현대", emoji: "🔹" },
             { name: "SK", emoji: "🔴" }
           ],
           bgColor: "bg-white"
@@ -1889,77 +1678,121 @@ const PRESET_TEMPLATES = {
         component: "Social_Proof",
         props: {
           rating: "4.9",
-          reviewCount: "3,247",
-          reviewSource: "G2, Capterra, ProductHunt 인증 평가",
+          reviewCount: "2,847",
+          reviewSource: "G2 & Capterra 인증 리뷰 기반",
           badges: [
-            { icon: "🏆", label: "2026 마케팅 SaaS 대상" },
-            { icon: "🛡️", label: "SOC 2 Type II 인증" },
-            { icon: "⚡", label: "평균 ROAS 340% 달성" },
-            { icon: "🌏", label: "48개국 글로벌 서비스" }
+            { icon: "🏆", label: "2026 SaaS 혁신상" },
+            { icon: "🛡️", label: "ISO 27001 / SOC2" },
+            { icon: "⚡", label: "99.99% 가동률" },
+            { icon: "🌏", label: "48개국 서비스" }
           ]
         }
       },
       {
         component: "Stats_Banner",
         props: {
-          bgColor: "bg-violet-600",
+          bgColor: "bg-indigo-600",
           stats: [
-            { value: "340%", label: "평균 ROAS 상승" },
-            { value: "2.1x", label: "전환율 향상" },
-            { value: "68%", label: "마케팅 비용 절감" },
-            { value: "15분", label: "캠페인 셋업 시간" }
+            { value: "78%", label: "업무 시간 절감" },
+            { value: "1,200+", label: "도입 기업 수" },
+            { value: "₩340억", label: "고객 누적 절감액" },
+            { value: "4.9/5", label: "고객 만족도" }
+          ]
+        }
+      },
+      {
+        component: "How_It_Works",
+        props: {
+          sectionBadge: "시작은 간단합니다",
+          sectionTitle: "3단계로 업무 자동화를 시작하세요",
+          sectionDesc: "복잡한 설정 없이, 누구나 10분 안에 첫 자동화를 만들 수 있습니다.",
+          steps: [
+            { number: "01", title: "30초 무료 가입", desc: "이메일 하나로 바로 시작. 신용카드 없이 14일간 모든 기능을 무료로 사용하세요.", icon: "📝", color: "from-blue-500 to-cyan-400" },
+            { number: "02", title: "AI로 워크플로우 설계", desc: "드래그 앤 드롭 또는 AI에게 자연어로 설명하면 자동화 시나리오가 즉시 생성됩니다.", icon: "⚙️", color: "from-violet-500 to-purple-400" },
+            { number: "03", title: "실행 & 성과 확인", desc: "실행 버튼 하나로 24/7 자동화 시작. 실시간 대시보드에서 절감 효과를 확인하세요.", icon: "🚀", color: "from-emerald-500 to-teal-400" }
           ]
         }
       },
       {
         component: "Features_Grid",
         props: {
-          sectionBadge: "핵심 마케팅 기능",
-          sectionTitle: "전환율을 끌어올리는 AI 마케팅 엔진",
-          sectionDesc: "데이터 기반의 스마트한 마케팅 자동화로 경쟁사를 압도하세요.",
+          sectionBadge: "강력한 핵심 기능",
+          sectionTitle: "경쟁사가 따라올 수 없는 AI 자동화 기술",
+          sectionDesc: "200개 이상의 앱과 네이티브 연동, 국내 유일 AI 자연어 워크플로우 설계 기술.",
           features: [
-            { icon: "🎯", title: "AI 타겟팅 최적화", desc: "머신러닝 기반으로 고가치 고객 세그먼트를 자동 식별하고 맞춤 메시지를 전달합니다." },
-            { icon: "📊", title: "실시간 퍼포먼스 대시보드", desc: "모든 채널의 캠페인 성과를 한 눈에 파악하고 즉시 의사결정할 수 있습니다." },
-            { icon: "🔄", title: "옴니채널 자동화", desc: "이메일, SMS, 푸시, 카카오톡까지 모든 채널을 하나의 워크플로우로 통합 관리합니다." }
+            { icon: "🤖", title: "AI 자연어 자동화 설계", desc: "'매주 월요일 매출 보고서 만들어줘'라고 말하면 AI가 전체 워크플로우를 자동 생성합니다." },
+            { icon: "⚡", title: "0.1초 초고속 실행", desc: "이벤트 발생 즉시 0.1초 이내 자동화 실행. 실시간 동기화로 지연 없는 처리." },
+            { icon: "📊", title: "실시간 ROI 대시보드", desc: "절감 시간, 비용, ROI를 실시간 추적. 경영진 보고용 리포트 자동 생성." }
           ]
+        }
+      },
+      {
+        component: "ROI_Calculator",
+        props: {
+          sectionTitle: "우리 팀의 절감 효과를 직접 계산해 보세요",
+          sectionDesc: "슬라이더를 조절하면 AutoWork 도입 시 예상 절감액이 실시간으로 계산됩니다.",
+          hourlyRate: 35000,
+          automationRate: 78,
+          weeklyHours: 20,
+          ctaText: "이 금액을 절감하러 가기 →",
+          ctaUrl: "#pricing"
         }
       },
       {
         component: "Before_After",
         props: {
-          sectionTitle: "GrowthEngine 도입 전/후, 이렇게 달라집니다",
-          sectionDesc: "실제 기업 고객 데이터 기반으로 측정된 마케팅 혁신의 결과를 직접 확인하세요.",
+          sectionTitle: "도입 전/후, 이렇게 달라집니다",
+          sectionDesc: "1,200개 기업의 실제 데이터 기반 업무 혁신 결과입니다.",
           beforeTitle: "도입 전 ❌",
           afterTitle: "도입 후 ✅",
           comparisons: [
-            { before: "캠페인 기획부터 실행까지 2주 소요", after: "AI 추천 기반 15분 내 캠페인 런칭" },
-            { before: "수동 A/B 테스트로 인사이트 부족", after: "AI가 자동 실험하고 최적안 적용" },
-            { before: "고객 이탈률 월 15% 이상 발생", after: "예측 모델로 이탈률 3% 이하로 감소" },
-            { before: "마케팅 ROI 측정 불가", after: "모든 터치포인트 ROAS 실시간 추적" }
+            { before: "수동 데이터 입력 3시간/일", after: "AI 자동 수집 3분 완료 (-98%)" },
+            { before: "주간 보고서 엑셀 6시간", after: "실시간 대시보드 자동 생성 (0분)" },
+            { before: "정산 실수 → 분쟁 월 2건", after: "자동 계산으로 분쟁 0건" },
+            { before: "고객 문의 평균 24시간 대기", after: "AI 챗봇 즉시 응답 (3초)" }
+          ]
+        }
+      },
+      {
+        component: "Comparison_Table",
+        props: {
+          sectionTitle: "왜 AutoWork를 선택해야 할까요?",
+          sectionDesc: "주요 업무 자동화 플랫폼과의 객관적 기능 비교.",
+          brandName: "AutoWork AI",
+          competitors: ["Z사 자동화", "M사 플로우"],
+          features: [
+            { name: "AI 자연어 워크플로우 설계", us: "✅", them: ["❌", "❌"] },
+            { name: "노코드 드래그 앤 드롭", us: "✅", them: ["✅", "⚠️"] },
+            { name: "실시간 ROI 대시보드", us: "✅", them: ["⚠️", "❌"] },
+            { name: "200+ 앱 네이티브 연동", us: "✅", them: ["✅", "❌"] },
+            { name: "한국어 24/7 기술지원", us: "✅", them: ["❌", "⚠️"] },
+            { name: "온프레미스 구축 옵션", us: "✅", them: ["❌", "❌"] },
+            { name: "14일 무료 (카드 불필요)", us: "✅", them: ["❌", "✅"] },
+            { name: "월 시작가", us: "₩29,000", them: ["$49", "$35"] }
           ]
         }
       },
       {
         component: "Testimonials_Grid",
         props: {
-          sectionTitle: "고객사의 생생한 성과 후기",
-          sectionDesc: "GrowthEngine으로 마케팅을 혁신한 기업들의 실제 이야기.",
+          sectionTitle: "1,200개 기업이 증명한 실제 성과",
+          sectionDesc: "AutoWork 도입 후 업무 생산성이 평균 78% 향상된 기업들의 생생한 후기.",
           testimonials: [
-            { avatar: "👩‍💻", name: "박서연", role: "토스 마케팅 리드", quote: "캠페인 셋업 시간이 90% 줄었고, ROAS는 3배 이상 올랐습니다. 팀 전체가 만족하고 있어요." },
-            { avatar: "👨‍💼", name: "이준호", role: "무신사 그로스 매니저", quote: "고객 세그먼트 자동 분류 기능이 혁신적입니다. 개인화 메시지 전환율이 5배 상승했습니다." },
-            { avatar: "💎", name: "한소희", role: "스타트업 CMO", quote: "마케팅 팀 2명으로 월 매출 3억을 달성했습니다. GrowthEngine 없이는 불가능했을 성과입니다." }
+            { avatar: "👩‍💻", name: "김민재", role: "토스 개발 리드", quote: "매일 1시간 걸리던 리포트가 1분에 자동 완료. 연간 절감액만 약 2,400만 원입니다." },
+            { avatar: "👨‍💼", name: "최우식", role: "라인 운영 총괄", quote: "도입 3일 만에 전체 연동 완료. 운영 인력 3명을 핵심 프로젝트에 재배치했습니다." },
+            { avatar: "💎", name: "윤아름", role: "스타트업 CEO", quote: "5명으로 월 매출 5억 달성. AutoWork 없이는 최소 15명이 필요한 규모입니다." }
           ]
         }
       },
       {
         component: "Pricing_Three_Tier",
         props: {
-          sectionTitle: "성장 단계에 맞는 합리적인 요금제",
-          sectionDesc: "모든 플랜에 14일 무료 체험이 포함됩니다. 신용카드 없이 시작하세요.",
+          sectionTitle: "투자 대비 10배 이상의 ROI를 보장합니다",
+          sectionDesc: "모든 플랜 14일 무료 체험. 신용카드 불필요. 론칭 기념 첫 3개월 50% 할인 중!",
           plans: [
-            { name: "그로스 스타터", price: "₩49,000", period: "월", features: "AI 캠페인 자동화 5개, 월 발송 10,000건, 이메일 + 카카오톡 채널, 기본 분석 대시보드", buttonText: "무료 체험 시작", isPopular: false },
-            { name: "프로 마케터", price: "₩149,000", period: "월", features: "무제한 AI 캠페인, 월 발송 100,000건, 옴니채널 통합(SMS 포함), 고급 세그먼트 + A/B 테스트, 우선 지원", buttonText: "가장 인기 있는 플랜", isPopular: true },
-            { name: "엔터프라이즈", price: "맞춤 견적", period: "연", features: "발송량 무제한, 전담 어카운트 매니저, 커스텀 API + 온프레미스 옵션, SLA 99.99% 보장", buttonText: "도입 상담 요청", isPopular: false }
+            { name: "스타터", price: "₩29,000", period: "월", features: "자동화 10개, 월 5,000회 실행, Slack·Discord 연동, 이메일 지원, 기본 대시보드", buttonText: "무료 체험 시작 →", isPopular: false },
+            { name: "프로 (추천)", price: "₩89,000", period: "월", features: "무제한 자동화, 월 50,000회, 200+ 앱 전체 연동, AI 자연어 설계, 24시간 우선 지원, 고급 ROI 대시보드", buttonText: "가장 인기 있는 플랜 →", isPopular: true },
+            { name: "엔터프라이즈", price: "별도 문의", period: "연", features: "실행 무제한, 온프레미스 구축, 전담 매니저, 커스텀 API, SLA 99.99%, 보안 감사 리포트", buttonText: "맞춤 상담 요청 →", isPopular: false }
           ]
         }
       },
@@ -1968,34 +1801,73 @@ const PRESET_TEMPLATES = {
         props: {
           sectionTitle: "자주 묻는 질문",
           faqs: [
-            { question: "기존 마케팅 툴과 연동이 가능한가요?", answer: "네, Google Analytics, HubSpot, Mailchimp, 카카오 비즈메시지 등 200개 이상의 툴과 즉시 연동됩니다." },
-            { question: "데이터 보안은 어떻게 관리되나요?", answer: "SOC 2 Type II 인증을 획득하였으며, 모든 데이터는 AES-256 암호화로 보호됩니다." },
-            { question: "무료 체험 후 자동 결제되나요?", answer: "아니요, 무료 체험은 신용카드 등록 없이 시작하며, 체험 종료 후 자동 결제되지 않습니다." }
+            { question: "비개발자도 사용할 수 있나요?", answer: "네! 노코드 드래그 앤 드롭과 AI 자연어 설계로 코딩 없이 사용 가능합니다. 평균 첫 자동화 완성 10분." },
+            { question: "기존 툴과 연동이 되나요?", answer: "Slack, Jira, Notion, Google Workspace, Salesforce, HubSpot 등 200개 이상 네이티브 연동." },
+            { question: "보안은 안전한가요?", answer: "ISO 27001, SOC 2 Type II 인증. AES-256 암호화. 엔터프라이즈는 온프레미스 가능." },
+            { question: "무료 체험 후 자동 결제되나요?", answer: "아닙니다. 카드 등록 없이 시작하며 자동 결제 절대 없습니다." },
+            { question: "해지는 어떻게 하나요?", answer: "설정에서 클릭 한 번으로 즉시 해지. 위약금·숨은 수수료 없습니다." }
           ]
         }
       },
       {
-        component: "Newsletter_CTA",
+        component: "CTA_Banner",
         props: {
-          headline: "마케팅 인사이트를 가장 먼저 받아보세요",
-          subtitle: "매주 최신 AI 마케팅 트렌드, 성공 사례, 무료 템플릿을 이메일로 전달합니다. 3만 명의 마케터와 함께하세요.",
-          inputPlaceholder: "marketing@company.com",
-          buttonText: "무료 구독하기",
-          privacyNote: "스팸 없음 · 언제든 구독 취소 가능"
+          headline: "매달 ₩89,000으로 직원 3명 분의 업무를 자동화하세요",
+          subheadline: "14일 무료 체험 · 카드 불필요 · 10분 만에 첫 자동화 · 언제든 해지 가능",
+          buttonText: "지금 무료로 시작하기 →",
+          bgColor: "bg-indigo-600"
         }
       },
       {
         component: "Footer_Simple",
         props: {
-          logoText: "GrowthEngine AI",
-          copyrightText: "© 2026 GrowthEngine AI Inc. All rights reserved.",
+          logoText: "AutoWork AI",
+          copyrightText: "© 2026 AutoWork AI Inc. All rights reserved. 사업자등록번호: 123-45-67890",
           links: [
             { label: "이용약관", url: "#" },
-            { label: "개인정보보호", url: "#" },
-            { label: "고객센터", url: "#" }
+            { label: "개인정보처리방침", url: "#" },
+            { label: "고객센터 (1600-0000)", url: "#" }
           ]
         }
       }
+    ]
+  },
+  saas: {
+    name: "☁️ CloudFlow SaaS 수익형",
+    desc: "SaaS 비즈니스 특화 전환 퍼널 구성",
+    blocks: [
+      { component: "Header_Basic", props: { logoText: "CloudFlow AI", navLinks: [{ label: "기능", url: "#features" }, { label: "ROI 계산", url: "#roi" }, { label: "요금제", url: "#pricing" }], ctaButtonText: "무료 시작하기" } },
+      { component: "Hero_Type_Gradient", props: { title: "비즈니스 프로세스를\n하나의 파이프라인으로 통합", subtitle: "수작업 데이터 수집, 문서 검토, 리포트 작성을 AI가 자동화합니다. 15,000개 팀이 도입했습니다.", primaryButtonText: "무료로 시작하기 →", secondaryButtonText: "자세히 알아보기", gradientFrom: "from-slate-900", gradientTo: "to-indigo-950" } },
+      { component: "Stats_Banner", props: { bgColor: "bg-indigo-600", stats: [{ value: "99.8%", label: "자동화 성공률" }, { value: "15,000+", label: "글로벌 도입 팀" }, { value: "₩3,200억", label: "누적 절약 비용" }, { value: "48%", label: "평균 비용 절감" }] } },
+      { component: "How_It_Works", props: { sectionBadge: "빠른 시작", sectionTitle: "5분 만에 첫 자동화를 만드세요", sectionDesc: "기술 지식 없이도 누구나 시작할 수 있습니다.", steps: [{ number: "01", title: "무료 가입", desc: "이메일 → 30초 가입. 카드 없이 즉시 시작.", icon: "✨", color: "from-blue-500 to-cyan-400" }, { number: "02", title: "AI 설계", desc: "AI에게 '이것 자동화해줘'라고 말하면 즉시 완성.", icon: "🤖", color: "from-violet-500 to-purple-400" }, { number: "03", title: "성과 확인", desc: "절감 시간·비용을 실시간 대시보드에서 확인.", icon: "📈", color: "from-emerald-500 to-teal-400" }] } },
+      { component: "Features_Grid", props: { sectionBadge: "핵심 기능", sectionTitle: "속도, 신뢰성, 보안성을 갖춘 플랫폼", sectionDesc: "엔터프라이즈급 보안과 개인 사용자 편의성을 동시에.", features: [{ icon: "🛡️", title: "군용급 보안", desc: "AES-256 암호화, SOC 2 인증으로 금융·의료 데이터도 안심." }, { icon: "⚡", title: "0.1초 실행 속도", desc: "트리거 발생 즉시 자동화 실행. 지연 없는 고속 엔진." }, { icon: "💡", title: "직관적 대시보드", desc: "드래그 앤 드롭으로 업무 흐름 설계, 성과를 한눈에." }] } },
+      { component: "ROI_Calculator", props: { sectionTitle: "도입 효과를 직접 계산하세요", sectionDesc: "우리 팀에 맞는 절감 효과를 슬라이더로 확인.", hourlyRate: 40000, automationRate: 72, weeklyHours: 25, ctaText: "절감 효과 체험 →", ctaUrl: "#pricing" } },
+      { component: "Testimonials_Grid", props: { sectionTitle: "실제 고객 성과 후기", sectionDesc: "CloudFlow로 업무를 혁신한 기업들.", testimonials: [{ avatar: "👩‍💻", name: "김민재", role: "토스 개발 리드", quote: "매일 1시간 → 1분 자동 완료. 연간 2,400만 원 절감." }, { avatar: "👨‍💼", name: "최우식", role: "라인 운영 총괄", quote: "3일 만에 전체 연동 완료. 운영 인력 3명 재배치." }, { avatar: "💎", name: "윤아름", role: "스타트업 CEO", quote: "5명으로 월 5억 매출. CloudFlow 없이는 15명 필요." }] } },
+      { component: "Pricing_Three_Tier", props: { sectionTitle: "합리적 가격, 확실한 ROI", sectionDesc: "모든 플랜 14일 무료. 카드 불필요.", plans: [{ name: "스타터", price: "₩29,000", period: "월", features: "자동화 10개, 월 5,000회, Slack·Discord, 이메일 지원", buttonText: "무료 체험 →", isPopular: false }, { name: "프로", price: "₩89,000", period: "월", features: "무제한 자동화, 월 50,000회, 전체 연동, AI 설계, 24시간 지원", buttonText: "가장 인기 →", isPopular: true }, { name: "엔터프라이즈", price: "별도 문의", period: "연", features: "무제한 실행, 온프레미스, 전담 매니저, API, SLA 99.99%", buttonText: "상담 요청 →", isPopular: false }] } },
+      { component: "FAQ_Accordion", props: { sectionTitle: "자주 묻는 질문", faqs: [{ question: "비개발자도 사용 가능?", answer: "네, 노코드 편집기와 AI 자연어 설계로 코딩 없이 가능." }, { question: "무료 체험 후 자동 결제?", answer: "아닙니다. 카드 등록 없이 시작, 자동 결제 없음." }, { question: "해지 복잡한가요?", answer: "클릭 한 번 즉시 해지. 위약금·숨은 수수료 없음." }] } },
+      { component: "Footer_Simple", props: { logoText: "CloudFlow AI", copyrightText: "© 2026 CloudFlow AI Inc. All rights reserved.", links: [{ label: "이용약관", url: "#" }, { label: "개인정보보호", url: "#" }, { label: "고객센터", url: "#" }] } }
+    ]
+  },
+  marketing: {
+    name: "🚀 마케팅 풀스택 수익형",
+    desc: "17블록 전환율 극대화 + 카드뉴스 + ROI + 플로팅CTA",
+    blocks: [
+      { component: "Urgency_Banner", props: { preText: "⚡ 얼리버드 특별 할인", headline: "첫 100팀 한정 — 연간 플랜 40% 할인 + 1:1 온보딩 무료", subText: "할인 마감까지", ctaText: "얼리버드 혜택 받기 →", ctaUrl: "#pricing", endDate: "2026-06-15T23:59:59", bgGradient: "from-amber-500 via-orange-500 to-red-500" } },
+      { component: "Header_Basic", props: { logoText: "GrowthEngine AI", navLinks: [{ label: "기능", url: "#features" }, { label: "ROI 계산", url: "#roi" }, { label: "후기", url: "#reviews" }, { label: "요금제", url: "#pricing" }], ctaButtonText: "무료 체험 시작" } },
+      { component: "Hero_Type_Gradient", props: { title: "마케팅 ROI를 340% 올리는\nAI 자동화 플랫폼", subtitle: "고객 획득부터 유지까지 전체 퍼널을 AI가 최적화. 500개 기업이 평균 ROAS 340%를 달성했습니다.", primaryButtonText: "14일 무료 체험 →", secondaryButtonText: "성공 사례 보기", gradientFrom: "from-violet-950", gradientTo: "to-slate-900" } },
+      { component: "Logo_Carousel", props: { sectionLabel: "500+ 기업이 신뢰하는 마케팅 파트너", logos: [{ name: "삼성전자", emoji: "🔵" }, { name: "네이버", emoji: "🟢" }, { name: "카카오", emoji: "🟡" }, { name: "토스", emoji: "🔷" }, { name: "라인", emoji: "🟩" }, { name: "쿠팡", emoji: "🟠" }], bgColor: "bg-white" } },
+      { component: "Social_Proof", props: { rating: "4.9", reviewCount: "3,247", reviewSource: "G2, Capterra, ProductHunt 인증 평가", badges: [{ icon: "🏆", label: "2026 마케팅 SaaS 대상" }, { icon: "🛡️", label: "SOC 2 Type II" }, { icon: "⚡", label: "평균 ROAS 340%" }, { icon: "🌏", label: "48개국 서비스" }] } },
+      { component: "Card_News_Carousel", props: { sectionBadge: "왜 GrowthEngine인가?", sectionTitle: "이런 불편함, 더 이상 겪지 마세요", sectionDesc: "마케팅 팀이 겪는 비효율의 원인과 해결책을 확인하세요.", autoPlaySpeed: 5000, ctaUrl: "#pricing", cards: [{ painIcon: "😩", painTitle: "캠페인 기획에만 2주", painDesc: "타겟 설정, 크리에이티브, 채널 배분에 너무 많은 시간이 소모됩니다.", solveIcon: "🚀", solveTitle: "AI가 15분 만에 완성", solveDesc: "목표만 입력하면 타겟·메시지·채널까지 자동 추천하고 실행.", ctaText: "캠페인 자동화 →", gradient: "from-rose-500 to-orange-400" }, { painIcon: "📊", painTitle: "어떤 광고가 효과적인지 모름", painDesc: "광고비는 나가는데 어떤 채널이 매출로 이어지는지 파악 불가.", solveIcon: "🎯", solveTitle: "실시간 ROAS 추적", solveDesc: "모든 터치포인트 성과를 실시간 추적, AI가 예산 재분배 자동 추천.", ctaText: "ROAS 대시보드 →", gradient: "from-blue-500 to-cyan-400" }, { painIcon: "💸", painTitle: "개인화 메시지 보낼 인력 부족", painDesc: "수천 명 고객에게 맞춤 메시지를 보내야 하지만 인력이 없습니다.", solveIcon: "🤖", solveTitle: "AI 초개인화 메시징", solveDesc: "행동 데이터 기반 1:1 맞춤 메시지를 자동 생성, 최적 시점 발송.", ctaText: "개인화 체험 →", gradient: "from-violet-500 to-purple-400" }] } },
+      { component: "Stats_Banner", props: { bgColor: "bg-slate-900", stats: [{ value: "340%", label: "평균 ROAS 상승" }, { value: "2.1x", label: "전환율 향상" }, { value: "68%", label: "마케팅 비용 절감" }, { value: "15분", label: "캠페인 셋업" }] } },
+      { component: "Features_Grid", props: { sectionBadge: "핵심 마케팅 기능", sectionTitle: "전환율을 끌어올리는 AI 엔진", sectionDesc: "데이터 기반 스마트 마케팅 자동화.", features: [{ icon: "🎯", title: "AI 타겟팅 최적화", desc: "머신러닝 기반 고가치 고객 세그먼트 자동 식별, 맞춤 메시지 전달." }, { icon: "📊", title: "실시간 대시보드", desc: "모든 채널 캠페인 성과를 한눈에 파악, 즉시 의사결정." }, { icon: "🔄", title: "옴니채널 자동화", desc: "이메일, SMS, 푸시, 카카오톡까지 하나의 워크플로우로 통합." }] } },
+      { component: "ROI_Calculator", props: { sectionTitle: "마케팅 절감 효과를 직접 계산하세요", sectionDesc: "슬라이더로 우리 팀의 절감 효과를 확인.", hourlyRate: 45000, automationRate: 68, weeklyHours: 30, ctaText: "이 금액을 절감하러 가기 →", ctaUrl: "#pricing" } },
+      { component: "Before_After", props: { sectionTitle: "도입 전/후가 이렇게 다릅니다", sectionDesc: "500개 기업 실제 데이터 기반.", beforeTitle: "도입 전 ❌", afterTitle: "도입 후 ✅", comparisons: [{ before: "캠페인 기획~실행 2주", after: "AI 추천 15분 런칭" }, { before: "고객 이탈률 월 15%", after: "예측 모델로 3% 이하" }, { before: "ROI 측정 불가", after: "실시간 ROAS 추적" }, { before: "수동 A/B 테스트 2주", after: "AI 멀티 실험 실시간" }] } },
+      { component: "Testimonials_Grid", props: { sectionTitle: "고객사의 실제 성과", sectionDesc: "GrowthEngine으로 마케팅을 혁신한 기업들.", testimonials: [{ avatar: "👩‍💻", name: "박서연", role: "토스 마케팅 리드", quote: "캠페인 셋업 90% 단축, ROAS 3배 상승." }, { avatar: "👨‍💼", name: "이준호", role: "무신사 그로스 매니저", quote: "개인화 메시지 전환율 5배 상승." }, { avatar: "💎", name: "한소희", role: "스타트업 CMO", quote: "마케팅 2명으로 월 매출 3억 달성." }] } },
+      { component: "Pricing_Three_Tier", props: { sectionTitle: "투자 대비 10배 ROI 보장", sectionDesc: "14일 무료 · 카드 불필요 · 얼리버드 40% 할인 중!", plans: [{ name: "그로스 스타터", price: "₩49,000", period: "월", features: "AI 캠페인 5개, 월 10,000건, 이메일+카카오톡, 기본 대시보드", buttonText: "무료 체험 →", isPopular: false }, { name: "프로 마케터", price: "₩149,000", period: "월", features: "무제한 캠페인, 월 100,000건, 옴니채널(SMS), A/B, 우선 지원", buttonText: "가장 인기 →", isPopular: true }, { name: "엔터프라이즈", price: "맞춤 견적", period: "연", features: "발송 무제한, 전담 매니저, 커스텀 API, 온프레미스, SLA 99.99%", buttonText: "상담 요청 →", isPopular: false }] } },
+      { component: "FAQ_Accordion", props: { sectionTitle: "자주 묻는 질문", faqs: [{ question: "기존 툴과 연동 가능?", answer: "GA, HubSpot, Mailchimp, 카카오 비즈메시지 등 200개 이상 즉시 연동." }, { question: "무료 체험 후 자동 결제?", answer: "아닙니다. 카드 등록 없이 시작, 자동 결제 절대 없음." }, { question: "데이터 보안은?", answer: "SOC 2 Type II, AES-256 암호화로 모든 데이터 보호." }] } },
+      { component: "Newsletter_CTA", props: { headline: "마케팅 인사이트를 가장 먼저 받아보세요", subtitle: "매주 AI 마케팅 트렌드, 성공 사례, 무료 템플릿을 이메일로 전달.", inputPlaceholder: "marketing@company.com", buttonText: "무료 구독하기", privacyNote: "스팸 없음 · 언제든 구독 취소" } },
+      { component: "Footer_Simple", props: { logoText: "GrowthEngine AI", copyrightText: "© 2026 GrowthEngine AI Inc. All rights reserved.", links: [{ label: "이용약관", url: "#" }, { label: "개인정보보호", url: "#" }, { label: "고객센터", url: "#" }] } },
+      { component: "Floating_CTA", props: { message: "⚡ 지금 시작하면 14일 무료 + 1:1 온보딩 무료!", buttonText: "무료 체험 시작 →", buttonUrl: "#pricing", bgColor: "bg-gradient-to-r from-indigo-600 to-violet-600" } }
     ]
   }
 };

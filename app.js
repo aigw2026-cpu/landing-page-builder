@@ -1200,6 +1200,419 @@ const COMPONENT_REGISTRY = {
         </section>
       `;
     }
+  },
+
+  How_It_Works: {
+    name: "도입 프로세스 3단계 (How_It_Works)",
+    icon: "🪜",
+    defaultProps: {
+      sectionBadge: "시작은 간단합니다",
+      sectionTitle: "3단계로 업무 자동화를 시작하세요",
+      sectionDesc: "복잡한 설정 없이, 누구나 10분 안에 첫 자동화를 만들 수 있습니다.",
+      steps: [
+        {
+          number: "01",
+          title: "무료 계정 생성",
+          desc: "이메일 하나로 30초 만에 가입하세요. 신용카드 없이 14일 무료 체험이 바로 시작됩니다.",
+          icon: "📝",
+          color: "from-blue-500 to-cyan-400"
+        },
+        {
+          number: "02",
+          title: "워크플로우 설계",
+          desc: "드래그 앤 드롭으로 자동화 시나리오를 만들거나, AI에게 자연어로 설명하면 자동 생성됩니다.",
+          icon: "⚙️",
+          color: "from-violet-500 to-purple-400"
+        },
+        {
+          number: "03",
+          title: "자동화 실행 & 모니터링",
+          desc: "실행 버튼 하나로 24/7 자동화가 시작됩니다. 실시간 대시보드에서 성과를 확인하세요.",
+          icon: "🚀",
+          color: "from-emerald-500 to-teal-400"
+        }
+      ]
+    },
+    schema: {
+      sectionBadge: { type: "text", label: "배지 텍스트" },
+      sectionTitle: { type: "text", label: "섹션 타이틀" },
+      sectionDesc: { type: "textarea", label: "섹션 설명" },
+      steps: {
+        type: "array",
+        label: "단계 목록",
+        itemSchema: {
+          number: { type: "text", label: "단계 번호 (01, 02 등)" },
+          title: { type: "text", label: "단계 제목" },
+          desc: { type: "textarea", label: "단계 설명" },
+          icon: { type: "text", label: "이모지 아이콘" },
+          color: { type: "text", label: "그라데이션 (from-색상 to-색상)" }
+        }
+      }
+    },
+    render(props) {
+      const steps = props.steps || [];
+      const stepsHtml = steps.map((s, i) => `
+        <div class="relative flex flex-col items-center text-center group">
+          <!-- Connector line -->
+          ${i < steps.length - 1 ? `<div class="hidden md:block absolute top-16 left-[60%] w-full h-0.5 bg-gradient-to-r ${s.color} opacity-20"></div>` : ''}
+          
+          <div class="w-24 h-24 rounded-3xl bg-gradient-to-br ${s.color} flex items-center justify-center text-4xl shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300 mb-6 relative">
+            ${s.icon}
+            <span class="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center text-xs font-extrabold text-slate-700 border-2 border-slate-100">${s.number}</span>
+          </div>
+          <h3 class="text-xl font-extrabold text-slate-900 mb-3">${s.title}</h3>
+          <p class="text-slate-600 text-sm leading-relaxed max-w-xs mx-auto">${s.desc}</p>
+        </div>
+      `).join('');
+
+      return `
+        <section class="py-20 md:py-28 px-6 bg-white">
+          <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+              <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 border border-emerald-100 rounded-full text-xs font-bold text-emerald-600 mb-5">${props.sectionBadge}</span>
+              <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">${props.sectionTitle}</h2>
+              <p class="text-slate-600 leading-relaxed">${props.sectionDesc}</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+              ${stepsHtml}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+  },
+
+  ROI_Calculator: {
+    name: "ROI 절감 계산기 (ROI_Calculator)",
+    icon: "🧮",
+    defaultProps: {
+      sectionTitle: "우리 팀의 절감 효과를 직접 계산해 보세요",
+      sectionDesc: "현재 업무 시간과 인건비를 입력하면, AutoWork 도입 시 예상 절감액을 실시간으로 확인할 수 있습니다.",
+      hourlyRate: 35000,
+      automationRate: 78,
+      weeklyHours: 20,
+      ctaText: "무료 체험으로 절감 시작하기 →",
+      ctaUrl: "#pricing"
+    },
+    schema: {
+      sectionTitle: { type: "text", label: "섹션 타이틀" },
+      sectionDesc: { type: "textarea", label: "섹션 설명" },
+      hourlyRate: { type: "text", label: "기본 시급 (원)" },
+      automationRate: { type: "text", label: "자동화 절감 비율 (%)" },
+      weeklyHours: { type: "text", label: "기본 주간 반복 업무 시간" },
+      ctaText: { type: "text", label: "CTA 버튼 텍스트" },
+      ctaUrl: { type: "text", label: "CTA 링크" }
+    },
+    render(props) {
+      const uid = 'roi_' + Math.random().toString(36).substr(2, 6);
+      const rate = parseInt(props.hourlyRate) || 35000;
+      const autoRate = parseInt(props.automationRate) || 78;
+      const defaultHours = parseInt(props.weeklyHours) || 20;
+
+      return `
+        <section class="py-20 md:py-28 px-6 bg-gradient-to-b from-slate-50 to-white">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">${props.sectionTitle}</h2>
+              <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">${props.sectionDesc}</p>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+              <div class="p-8 md:p-10">
+                <!-- Input Sliders -->
+                <div class="space-y-8 mb-10">
+                  <div>
+                    <div class="flex items-center justify-between mb-3">
+                      <label class="text-sm font-bold text-slate-700">주간 반복 업무 시간</label>
+                      <span class="text-lg font-extrabold text-indigo-600" id="${uid}-hours-val">${defaultHours}시간</span>
+                    </div>
+                    <input type="range" min="5" max="80" value="${defaultHours}" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600" id="${uid}-hours"
+                      oninput="document.getElementById('${uid}-hours-val').textContent=this.value+'시간'; ${uid}_calc();">
+                    <div class="flex justify-between text-xs text-slate-400 mt-1"><span>5시간</span><span>80시간</span></div>
+                  </div>
+
+                  <div>
+                    <div class="flex items-center justify-between mb-3">
+                      <label class="text-sm font-bold text-slate-700">팀 인원 수</label>
+                      <span class="text-lg font-extrabold text-indigo-600" id="${uid}-people-val">5명</span>
+                    </div>
+                    <input type="range" min="1" max="50" value="5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600" id="${uid}-people"
+                      oninput="document.getElementById('${uid}-people-val').textContent=this.value+'명'; ${uid}_calc();">
+                    <div class="flex justify-between text-xs text-slate-400 mt-1"><span>1명</span><span>50명</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Results Banner -->
+              <div class="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 p-8 md:p-10 text-white relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:14px_14px]"></div>
+                <div class="relative z-10">
+                  <p class="text-indigo-100 text-xs font-semibold uppercase tracking-wider mb-4">예상 월간 절감 효과</p>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                    <div class="text-center">
+                      <div class="text-3xl md:text-4xl font-extrabold" id="${uid}-saved-hours">${Math.round(defaultHours * 5 * 4 * autoRate / 100)}시간</div>
+                      <div class="text-indigo-200 text-sm mt-1">월간 절약 시간</div>
+                    </div>
+                    <div class="text-center">
+                      <div class="text-3xl md:text-4xl font-extrabold" id="${uid}-saved-money">₩${(Math.round(defaultHours * 5 * 4 * autoRate / 100 * rate / 10000)).toLocaleString()}만</div>
+                      <div class="text-indigo-200 text-sm mt-1">월간 비용 절감</div>
+                    </div>
+                    <div class="text-center">
+                      <div class="text-3xl md:text-4xl font-extrabold" id="${uid}-saved-yearly">₩${(Math.round(defaultHours * 5 * 4 * autoRate / 100 * rate * 12 / 10000)).toLocaleString()}만</div>
+                      <div class="text-indigo-200 text-sm mt-1">연간 비용 절감</div>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <a href="${props.ctaUrl || '#'}" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-indigo-700 font-bold rounded-2xl shadow-lg hover:bg-indigo-50 hover:shadow-xl hover:scale-105 active:scale-100 transition-all text-sm">
+                      ${props.ctaText}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            window.${uid}_calc = function() {
+              var h = parseInt(document.getElementById('${uid}-hours').value) || ${defaultHours};
+              var p = parseInt(document.getElementById('${uid}-people').value) || 5;
+              var savedH = Math.round(h * p * 4 * ${autoRate} / 100);
+              var savedM = Math.round(savedH * ${rate} / 10000);
+              var savedY = savedM * 12;
+              document.getElementById('${uid}-saved-hours').textContent = savedH.toLocaleString() + '시간';
+              document.getElementById('${uid}-saved-money').textContent = '₩' + savedM.toLocaleString() + '만';
+              document.getElementById('${uid}-saved-yearly').textContent = '₩' + savedY.toLocaleString() + '만';
+            };
+          </script>
+        </section>
+      `;
+    }
+  },
+
+  Comparison_Table: {
+    name: "경쟁사 비교표 (Comparison_Table)",
+    icon: "⚔️",
+    defaultProps: {
+      sectionTitle: "왜 AutoWork를 선택해야 할까요?",
+      sectionDesc: "주요 업무 자동화 플랫폼과의 객관적인 기능 비교표입니다.",
+      brandName: "AutoWork AI",
+      competitors: ["Z사 자동화", "M사 플로우"],
+      features: [
+        { name: "AI 자연어 워크플로우 설계", us: "✅", them: ["❌", "❌"] },
+        { name: "노코드 드래그 앤 드롭 편집기", us: "✅", them: ["✅", "⚠️"] },
+        { name: "실시간 대시보드 & 리포팅", us: "✅", them: ["⚠️", "✅"] },
+        { name: "200+ 앱 네이티브 연동", us: "✅", them: ["✅", "❌"] },
+        { name: "온프레미스 구축 옵션", us: "✅", them: ["❌", "❌"] },
+        { name: "24/7 한국어 기술 지원", us: "✅", them: ["❌", "⚠️"] },
+        { name: "14일 무료 체험 (카드 불필요)", us: "✅", them: ["❌", "✅"] },
+        { name: "월 시작 가격", us: "₩29,000", them: ["$49/mo", "$35/mo"] }
+      ]
+    },
+    schema: {
+      sectionTitle: { type: "text", label: "섹션 타이틀" },
+      sectionDesc: { type: "textarea", label: "섹션 설명" },
+      brandName: { type: "text", label: "자사 브랜드 이름" },
+      competitors: {
+        type: "array",
+        label: "경쟁사 이름 목록",
+        itemSchema: {
+          _value: { type: "text", label: "경쟁사 이름" }
+        }
+      },
+      features: {
+        type: "array",
+        label: "비교 항목 목록",
+        itemSchema: {
+          name: { type: "text", label: "기능 이름" },
+          us: { type: "text", label: "자사 (✅/❌/⚠️/텍스트)" }
+        }
+      }
+    },
+    render(props) {
+      const comps = props.competitors || [];
+      const feats = props.features || [];
+      const compNames = comps.map(c => typeof c === 'string' ? c : c._value || '');
+
+      const headerCells = compNames.map(n => `
+        <th class="px-4 py-4 text-center text-sm font-semibold text-slate-500 whitespace-nowrap">${n}</th>
+      `).join('');
+
+      const rows = feats.map((f, i) => {
+        const themCells = (f.them || []).map(v => `
+          <td class="px-4 py-4 text-center text-sm ${v === '✅' ? 'text-emerald-500' : v === '❌' ? 'text-slate-300' : v === '⚠️' ? 'text-amber-400' : 'text-slate-600'}">${v}</td>
+        `).join('');
+
+        return `
+          <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-indigo-50/30 transition-colors">
+            <td class="px-6 py-4 text-sm font-medium text-slate-700">${f.name}</td>
+            <td class="px-4 py-4 text-center text-sm font-bold ${f.us === '✅' ? 'text-emerald-500 text-lg' : 'text-indigo-600'}">${f.us}</td>
+            ${themCells}
+          </tr>
+        `;
+      }).join('');
+
+      return `
+        <section class="py-20 md:py-28 px-6 bg-slate-50/30">
+          <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">${props.sectionTitle}</h2>
+              <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">${props.sectionDesc}</p>
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-x-auto">
+              <table class="w-full min-w-[600px]">
+                <thead>
+                  <tr class="border-b-2 border-slate-100">
+                    <th class="px-6 py-4 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">기능 비교</th>
+                    <th class="px-4 py-4 text-center">
+                      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full">
+                        <span class="w-5 h-5 rounded bg-gradient-to-br from-indigo-600 to-violet-500 flex items-center justify-center text-white text-[10px] font-bold">A</span>
+                        <span class="text-sm font-bold text-indigo-700">${props.brandName}</span>
+                      </div>
+                    </th>
+                    ${headerCells}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rows}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+  },
+
+  Urgency_Banner: {
+    name: "긴급 프로모션 배너 (Urgency_Banner)",
+    icon: "⏰",
+    defaultProps: {
+      preText: "🔥 기간 한정 프로모션",
+      headline: "지금 가입하면 첫 3개월 50% 할인",
+      subText: "프로모션 종료까지 남은 시간",
+      ctaText: "할인가로 시작하기 →",
+      ctaUrl: "#pricing",
+      endDate: "2026-06-30T23:59:59",
+      bgGradient: "from-rose-600 via-pink-600 to-violet-600"
+    },
+    schema: {
+      preText: { type: "text", label: "상단 텍스트 (이모지 포함)" },
+      headline: { type: "text", label: "프로모션 헤드라인" },
+      subText: { type: "text", label: "카운트다운 안내 문구" },
+      ctaText: { type: "text", label: "CTA 버튼 텍스트" },
+      ctaUrl: { type: "text", label: "CTA 링크" },
+      endDate: { type: "text", label: "종료 일시 (YYYY-MM-DDTHH:mm:ss)" },
+      bgGradient: {
+        type: "select",
+        label: "배경 그라데이션",
+        options: [
+          { value: "from-rose-600 via-pink-600 to-violet-600", label: "로즈 → 바이올렛" },
+          { value: "from-amber-500 via-orange-500 to-red-500", label: "앰버 → 레드" },
+          { value: "from-indigo-600 via-blue-600 to-cyan-500", label: "인디고 → 시안" }
+        ]
+      }
+    },
+    render(props) {
+      const uid = 'urg_' + Math.random().toString(36).substr(2, 6);
+      return `
+        <section class="py-10 px-6 bg-gradient-to-r ${props.bgGradient} relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+          <div class="absolute top-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-20 -translate-y-20 animate-pulse"></div>
+          <div class="absolute bottom-0 right-0 w-32 h-32 bg-white/10 rounded-full translate-x-16 translate-y-16 animate-pulse" style="animation-delay:1s"></div>
+
+          <div class="max-w-4xl mx-auto text-center relative z-10">
+            <p class="text-white/80 text-xs font-bold uppercase tracking-widest mb-2">${props.preText}</p>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4 tracking-tight">${props.headline}</h2>
+            
+            <p class="text-white/60 text-xs font-semibold uppercase tracking-wider mb-3">${props.subText}</p>
+            <div class="flex justify-center gap-3 mb-6" id="${uid}-countdown">
+              <div class="bg-white/15 backdrop-blur rounded-xl px-4 py-3 min-w-[70px]">
+                <div class="text-2xl font-extrabold text-white" id="${uid}-d">00</div>
+                <div class="text-[10px] text-white/60 font-semibold uppercase">일</div>
+              </div>
+              <div class="bg-white/15 backdrop-blur rounded-xl px-4 py-3 min-w-[70px]">
+                <div class="text-2xl font-extrabold text-white" id="${uid}-h">00</div>
+                <div class="text-[10px] text-white/60 font-semibold uppercase">시간</div>
+              </div>
+              <div class="bg-white/15 backdrop-blur rounded-xl px-4 py-3 min-w-[70px]">
+                <div class="text-2xl font-extrabold text-white" id="${uid}-m">00</div>
+                <div class="text-[10px] text-white/60 font-semibold uppercase">분</div>
+              </div>
+              <div class="bg-white/15 backdrop-blur rounded-xl px-4 py-3 min-w-[70px]">
+                <div class="text-2xl font-extrabold text-white" id="${uid}-s">00</div>
+                <div class="text-[10px] text-white/60 font-semibold uppercase">초</div>
+              </div>
+            </div>
+            
+            <a href="${props.ctaUrl || '#'}" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-pink-600 font-bold rounded-2xl shadow-xl hover:bg-pink-50 hover:shadow-2xl hover:scale-105 active:scale-100 transition-all text-sm">
+              ${props.ctaText}
+            </a>
+          </div>
+
+          <script>
+            (function() {
+              var end = new Date('${props.endDate || '2026-06-30T23:59:59'}').getTime();
+              function tick() {
+                var now = Date.now();
+                var diff = Math.max(0, end - now);
+                var d = Math.floor(diff / 86400000);
+                var h = Math.floor((diff % 86400000) / 3600000);
+                var m = Math.floor((diff % 3600000) / 60000);
+                var s = Math.floor((diff % 60000) / 1000);
+                var el_d = document.getElementById('${uid}-d');
+                if (el_d) el_d.textContent = String(d).padStart(2, '0');
+                var el_h = document.getElementById('${uid}-h');
+                if (el_h) el_h.textContent = String(h).padStart(2, '0');
+                var el_m = document.getElementById('${uid}-m');
+                if (el_m) el_m.textContent = String(m).padStart(2, '0');
+                var el_s = document.getElementById('${uid}-s');
+                if (el_s) el_s.textContent = String(s).padStart(2, '0');
+              }
+              tick();
+              setInterval(tick, 1000);
+            })();
+          </script>
+        </section>
+      `;
+    }
+  },
+
+  Floating_CTA: {
+    name: "플로팅 CTA 바 (Floating_CTA)",
+    icon: "📌",
+    defaultProps: {
+      message: "지금 시작하면 14일 무료 체험 + 온보딩 지원까지 무료!",
+      buttonText: "무료 체험 시작하기",
+      buttonUrl: "#pricing",
+      bgColor: "bg-slate-900"
+    },
+    schema: {
+      message: { type: "text", label: "안내 메시지" },
+      buttonText: { type: "text", label: "CTA 버튼 텍스트" },
+      buttonUrl: { type: "text", label: "CTA 링크" },
+      bgColor: {
+        type: "select",
+        label: "배경색",
+        options: [
+          { value: "bg-slate-900", label: "다크" },
+          { value: "bg-indigo-600", label: "인디고" },
+          { value: "bg-gradient-to-r from-indigo-600 to-violet-600", label: "그라데이션" }
+        ]
+      }
+    },
+    render(props) {
+      return `
+        <div class="fixed bottom-0 left-0 right-0 ${props.bgColor || 'bg-slate-900'} border-t border-white/10 py-3 px-6 z-50 shadow-2xl backdrop-blur-md">
+          <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+            <p class="text-white text-sm font-medium hidden sm:block">${props.message}</p>
+            <p class="text-white text-xs font-medium sm:hidden">${props.message}</p>
+            <a href="${props.buttonUrl || '#'}" class="flex-shrink-0 px-6 py-2.5 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:bg-indigo-50 hover:scale-105 active:scale-100 transition-all text-sm whitespace-nowrap">
+              ${props.buttonText}
+            </a>
+          </div>
+        </div>
+      `;
+    }
   }
 };
 

@@ -735,6 +735,252 @@ const COMPONENT_REGISTRY = {
         </section>
       `;
     }
+  },
+
+  Logo_Carousel: {
+    name: "파트너 로고 캐러셀 (Logo_Carousel)",
+    icon: "🏢",
+    defaultProps: {
+      sectionLabel: "신뢰할 수 있는 파트너사와 함께합니다",
+      logos: [
+        { name: "Samsung", emoji: "🔵" },
+        { name: "Naver", emoji: "🟢" },
+        { name: "Kakao", emoji: "🟡" },
+        { name: "Toss", emoji: "🔷" },
+        { name: "LINE", emoji: "🟩" },
+        { name: "Coupang", emoji: "🟠" },
+        { name: "Hyundai", emoji: "🔹" },
+        { name: "SK", emoji: "🔴" }
+      ],
+      bgColor: "bg-white"
+    },
+    schema: {
+      sectionLabel: { type: "text", label: "상단 안내 문구" },
+      bgColor: {
+        type: "select",
+        label: "배경색",
+        options: [
+          { value: "bg-white", label: "흰색" },
+          { value: "bg-slate-50", label: "연한 회색" },
+          { value: "bg-slate-900", label: "다크 모드" }
+        ]
+      },
+      logos: {
+        type: "array",
+        label: "파트너사 목록",
+        itemSchema: {
+          name: { type: "text", label: "회사 이름" },
+          emoji: { type: "text", label: "이모지 아이콘" }
+        }
+      }
+    },
+    render(props) {
+      const isDark = props.bgColor === "bg-slate-900";
+      const textColor = isDark ? "text-slate-400" : "text-slate-400";
+      const logoColor = isDark ? "text-slate-300" : "text-slate-600";
+      const items = props.logos || [];
+      const logosHtml = items.map(l => `
+        <div class="flex-shrink-0 flex items-center gap-3 px-8 py-4 ${isDark ? 'bg-slate-800/50' : 'bg-slate-50/80'} rounded-2xl border ${isDark ? 'border-slate-700' : 'border-slate-100'} hover:scale-105 transition-transform duration-300">
+          <span class="text-2xl">${l.emoji}</span>
+          <span class="font-bold ${logoColor} text-sm tracking-wide">${l.name}</span>
+        </div>
+      `).join('');
+
+      // Duplicate for infinite scroll effect
+      return `
+        <section class="${props.bgColor || 'bg-white'} py-12 px-6 overflow-hidden">
+          <div class="max-w-6xl mx-auto">
+            <p class="text-center text-xs font-semibold ${textColor} uppercase tracking-[0.2em] mb-8">${props.sectionLabel}</p>
+            <div class="relative">
+              <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r ${isDark ? 'from-slate-900' : 'from-white'} to-transparent z-10"></div>
+              <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l ${isDark ? 'from-slate-900' : 'from-white'} to-transparent z-10"></div>
+              <div class="flex gap-6 animate-marquee">
+                ${logosHtml}
+                ${logosHtml}
+              </div>
+            </div>
+          </div>
+          <style>
+            @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+            .animate-marquee { animation: marquee 25s linear infinite; width: max-content; }
+            .animate-marquee:hover { animation-play-state: paused; }
+          </style>
+        </section>
+      `;
+    }
+  },
+
+  Social_Proof: {
+    name: "소셜 증거 배너 (Social_Proof)",
+    icon: "⭐",
+    defaultProps: {
+      rating: "4.9",
+      reviewCount: "2,847",
+      reviewSource: "G2 & Capterra 인증 평가",
+      badges: [
+        { icon: "🏆", label: "2026 올해의 SaaS 혁신상" },
+        { icon: "🛡️", label: "ISO 27001 인증 보안" },
+        { icon: "⚡", label: "99.99% 가동률 보장" },
+        { icon: "🌏", label: "48개국 글로벌 서비스" }
+      ]
+    },
+    schema: {
+      rating: { type: "text", label: "평균 평점 (예: 4.9)" },
+      reviewCount: { type: "text", label: "리뷰 건수 (예: 2,847)" },
+      reviewSource: { type: "text", label: "리뷰 출처 설명" },
+      badges: {
+        type: "array",
+        label: "신뢰 배지 목록",
+        itemSchema: {
+          icon: { type: "text", label: "이모지 아이콘" },
+          label: { type: "text", label: "배지 설명" }
+        }
+      }
+    },
+    render(props) {
+      const stars = "★".repeat(Math.floor(parseFloat(props.rating || "5")));
+      const items = props.badges || [];
+      const badgesHtml = items.map(b => `
+        <div class="flex items-center gap-3 px-5 py-3 bg-white border border-slate-100 rounded-xl shadow-sm">
+          <span class="text-lg">${b.icon}</span>
+          <span class="text-sm font-semibold text-slate-700">${b.label}</span>
+        </div>
+      `).join('');
+
+      return `
+        <section class="py-14 px-6 bg-gradient-to-b from-amber-50/60 to-white border-y border-amber-100/50">
+          <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-10">
+              <div class="flex items-center gap-3">
+                <span class="text-3xl font-extrabold text-slate-900">${props.rating}</span>
+                <div>
+                  <div class="text-amber-400 text-lg tracking-wider">${stars}</div>
+                  <p class="text-xs text-slate-500 font-medium">${props.reviewCount}개 리뷰 기반</p>
+                </div>
+              </div>
+              <div class="hidden md:block w-px h-10 bg-slate-200"></div>
+              <p class="text-sm text-slate-500 font-medium">${props.reviewSource}</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4">
+              ${badgesHtml}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+  },
+
+  Before_After: {
+    name: "비포/애프터 비교 (Before_After)",
+    icon: "🔄",
+    defaultProps: {
+      sectionTitle: "AutoWork 도입 전/후, 이렇게 달라집니다",
+      sectionDesc: "실제 기업 고객 데이터 기반으로 측정된 업무 혁신의 결과를 직접 확인하세요.",
+      beforeTitle: "도입 전 ❌",
+      afterTitle: "도입 후 ✅",
+      comparisons: [
+        { before: "매일 반복되는 수동 데이터 입력 3시간", after: "AI 자동 수집으로 3분 완료" },
+        { before: "주간 보고서 엑셀 수작업 6시간", after: "실시간 대시보드 자동 생성" },
+        { before: "인사/급여 정산 실수로 인한 분쟁", after: "100% 정확도 자동 계산 시스템" },
+        { before: "고객 문의 응대 평균 24시간 대기", after: "AI 챗봇 즉시 응답 + 에스컬레이션" }
+      ]
+    },
+    schema: {
+      sectionTitle: { type: "text", label: "섹션 타이틀" },
+      sectionDesc: { type: "textarea", label: "서브 설명" },
+      beforeTitle: { type: "text", label: "도입 전 라벨" },
+      afterTitle: { type: "text", label: "도입 후 라벨" },
+      comparisons: {
+        type: "array",
+        label: "비교 항목 목록",
+        itemSchema: {
+          before: { type: "text", label: "도입 전 상황" },
+          after: { type: "text", label: "도입 후 변화" }
+        }
+      }
+    },
+    render(props) {
+      const items = props.comparisons || [];
+      const rowsHtml = items.map(c => `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+          <div class="p-5 bg-red-50/60 border-b border-r border-red-100 flex items-start gap-3">
+            <span class="text-red-400 font-bold text-sm mt-0.5">✕</span>
+            <span class="text-slate-700 text-sm leading-relaxed">${c.before}</span>
+          </div>
+          <div class="p-5 bg-emerald-50/60 border-b border-emerald-100 flex items-start gap-3">
+            <span class="text-emerald-500 font-bold text-sm mt-0.5">✓</span>
+            <span class="text-slate-700 text-sm leading-relaxed font-medium">${c.after}</span>
+          </div>
+        </div>
+      `).join('');
+
+      return `
+        <section class="py-20 md:py-24 px-6 bg-white">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">${props.sectionTitle}</h2>
+              <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">${props.sectionDesc}</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 overflow-hidden shadow-lg">
+              <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="p-4 bg-red-100/70 text-center border-b border-r border-red-200">
+                  <span class="font-bold text-red-600 text-sm uppercase tracking-wider">${props.beforeTitle}</span>
+                </div>
+                <div class="p-4 bg-emerald-100/70 text-center border-b border-emerald-200">
+                  <span class="font-bold text-emerald-600 text-sm uppercase tracking-wider">${props.afterTitle}</span>
+                </div>
+              </div>
+              ${rowsHtml}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+  },
+
+  Newsletter_CTA: {
+    name: "뉴스레터 구독 CTA (Newsletter_CTA)",
+    icon: "📬",
+    defaultProps: {
+      headline: "업무 자동화 트렌드를 가장 먼저 받아보세요",
+      subtitle: "매주 업계 최신 AI 자동화 인사이트, 활용 팁, 무료 템플릿을 이메일로 전달해 드립니다. 3만 명의 구독자와 함께하세요.",
+      inputPlaceholder: "work@company.com",
+      buttonText: "무료 구독 시작하기",
+      privacyNote: "스팸은 절대 보내지 않습니다. 언제든 구독 취소가 가능합니다."
+    },
+    schema: {
+      headline: { type: "text", label: "대타이틀" },
+      subtitle: { type: "textarea", label: "설명글" },
+      inputPlaceholder: { type: "text", label: "이메일 입력 안내문" },
+      buttonText: { type: "text", label: "구독 버튼 텍스트" },
+      privacyNote: { type: "text", label: "하단 개인정보 안내문" }
+    },
+    render(props) {
+      return `
+        <section class="py-20 px-6 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 relative overflow-hidden">
+          <!-- Animated gradient orbs -->
+          <div class="absolute top-0 left-1/4 w-72 h-72 bg-indigo-500/15 rounded-full blur-[80px] animate-pulse"></div>
+          <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-[100px] animate-pulse" style="animation-delay: 1s;"></div>
+          
+          <div class="max-w-2xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/10 rounded-full text-xs font-semibold text-indigo-200 mb-6 backdrop-blur-sm">
+              <span>📬</span> 뉴스레터
+            </div>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-5 tracking-tight leading-tight">${props.headline}</h2>
+            <p class="text-indigo-200/70 leading-relaxed mb-8 text-sm md:text-base font-light">${props.subtitle}</p>
+            
+            <form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('구독이 완료되었습니다! 🎉 환영합니다!');">
+              <input type="email" required placeholder="${props.inputPlaceholder}" class="flex-1 px-5 py-4 bg-white/10 border border-white/15 rounded-xl text-white placeholder-indigo-300/50 text-sm outline-none focus:border-indigo-400 focus:bg-white/15 backdrop-blur-sm transition-all">
+              <button type="submit" class="px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:bg-indigo-50 hover:shadow-xl active:scale-98 transition-all text-sm whitespace-nowrap">
+                ${props.buttonText}
+              </button>
+            </form>
+            
+            <p class="text-xs text-indigo-300/40 mt-5 font-medium">${props.privacyNote}</p>
+          </div>
+        </section>
+      `;
+    }
   }
 };
 
@@ -895,6 +1141,164 @@ const PRESET_TEMPLATES = {
           links: [
             { label: "개인정보보호", url: "#" },
             { label: "도움말", url: "#" }
+          ]
+        }
+      }
+    ]
+  },
+  marketing: {
+    name: "🚀 마케팅 최적화 풀스택",
+    desc: "전환율 극대화를 위한 캐러셀 + 소셜 증거 + 비교표 + 뉴스레터",
+    blocks: [
+      {
+        component: "Header_Basic",
+        props: {
+          logoText: "GrowthEngine AI",
+          navLinks: [
+            { label: "기능", url: "#features" },
+            { label: "고객 후기", url: "#reviews" },
+            { label: "요금제", url: "#pricing" },
+            { label: "뉴스레터", url: "#newsletter" }
+          ],
+          ctaButtonText: "지금 바로 시작"
+        }
+      },
+      {
+        component: "Hero_Type_Gradient",
+        props: {
+          title: "매출을 2배로 만드는\nAI 마케팅 자동화 플랫폼",
+          subtitle: "고객 획득부터 유지까지, 모든 마케팅 퍼널을 AI가 자동 최적화합니다. 500개 이상의 기업이 이미 도입했습니다.",
+          primaryButtonText: "14일 무료 체험 →",
+          secondaryButtonText: "제품 데모 보기",
+          gradientFrom: "from-violet-950",
+          gradientTo: "to-slate-900"
+        }
+      },
+      {
+        component: "Logo_Carousel",
+        props: {
+          sectionLabel: "500+ 기업이 신뢰하는 마케팅 파트너",
+          logos: [
+            { name: "Samsung", emoji: "🔵" },
+            { name: "Naver", emoji: "🟢" },
+            { name: "Kakao", emoji: "🟡" },
+            { name: "Toss", emoji: "🔷" },
+            { name: "LINE", emoji: "🟩" },
+            { name: "Coupang", emoji: "🟠" },
+            { name: "Hyundai", emoji: "🔹" },
+            { name: "SK", emoji: "🔴" }
+          ],
+          bgColor: "bg-white"
+        }
+      },
+      {
+        component: "Social_Proof",
+        props: {
+          rating: "4.9",
+          reviewCount: "3,247",
+          reviewSource: "G2, Capterra, ProductHunt 인증 평가",
+          badges: [
+            { icon: "🏆", label: "2026 마케팅 SaaS 대상" },
+            { icon: "🛡️", label: "SOC 2 Type II 인증" },
+            { icon: "⚡", label: "평균 ROAS 340% 달성" },
+            { icon: "🌏", label: "48개국 글로벌 서비스" }
+          ]
+        }
+      },
+      {
+        component: "Stats_Banner",
+        props: {
+          bgColor: "bg-violet-600",
+          stats: [
+            { value: "340%", label: "평균 ROAS 상승" },
+            { value: "2.1x", label: "전환율 향상" },
+            { value: "68%", label: "마케팅 비용 절감" },
+            { value: "15분", label: "캠페인 셋업 시간" }
+          ]
+        }
+      },
+      {
+        component: "Features_Grid",
+        props: {
+          sectionBadge: "핵심 마케팅 기능",
+          sectionTitle: "전환율을 끌어올리는 AI 마케팅 엔진",
+          sectionDesc: "데이터 기반의 스마트한 마케팅 자동화로 경쟁사를 압도하세요.",
+          features: [
+            { icon: "🎯", title: "AI 타겟팅 최적화", desc: "머신러닝 기반으로 고가치 고객 세그먼트를 자동 식별하고 맞춤 메시지를 전달합니다." },
+            { icon: "📊", title: "실시간 퍼포먼스 대시보드", desc: "모든 채널의 캠페인 성과를 한 눈에 파악하고 즉시 의사결정할 수 있습니다." },
+            { icon: "🔄", title: "옴니채널 자동화", desc: "이메일, SMS, 푸시, 카카오톡까지 모든 채널을 하나의 워크플로우로 통합 관리합니다." }
+          ]
+        }
+      },
+      {
+        component: "Before_After",
+        props: {
+          sectionTitle: "GrowthEngine 도입 전/후, 이렇게 달라집니다",
+          sectionDesc: "실제 기업 고객 데이터 기반으로 측정된 마케팅 혁신의 결과를 직접 확인하세요.",
+          beforeTitle: "도입 전 ❌",
+          afterTitle: "도입 후 ✅",
+          comparisons: [
+            { before: "캠페인 기획부터 실행까지 2주 소요", after: "AI 추천 기반 15분 내 캠페인 런칭" },
+            { before: "수동 A/B 테스트로 인사이트 부족", after: "AI가 자동 실험하고 최적안 적용" },
+            { before: "고객 이탈률 월 15% 이상 발생", after: "예측 모델로 이탈률 3% 이하로 감소" },
+            { before: "마케팅 ROI 측정 불가", after: "모든 터치포인트 ROAS 실시간 추적" }
+          ]
+        }
+      },
+      {
+        component: "Testimonials_Grid",
+        props: {
+          sectionTitle: "고객사의 생생한 성과 후기",
+          sectionDesc: "GrowthEngine으로 마케팅을 혁신한 기업들의 실제 이야기.",
+          testimonials: [
+            { avatar: "👩‍💻", name: "박서연", role: "토스 마케팅 리드", quote: "캠페인 셋업 시간이 90% 줄었고, ROAS는 3배 이상 올랐습니다. 팀 전체가 만족하고 있어요." },
+            { avatar: "👨‍💼", name: "이준호", role: "무신사 그로스 매니저", quote: "고객 세그먼트 자동 분류 기능이 혁신적입니다. 개인화 메시지 전환율이 5배 상승했습니다." },
+            { avatar: "💎", name: "한소희", role: "스타트업 CMO", quote: "마케팅 팀 2명으로 월 매출 3억을 달성했습니다. GrowthEngine 없이는 불가능했을 성과입니다." }
+          ]
+        }
+      },
+      {
+        component: "Pricing_Three_Tier",
+        props: {
+          sectionTitle: "성장 단계에 맞는 합리적인 요금제",
+          sectionDesc: "모든 플랜에 14일 무료 체험이 포함됩니다. 신용카드 없이 시작하세요.",
+          plans: [
+            { name: "그로스 스타터", price: "₩49,000", period: "월", features: "AI 캠페인 자동화 5개, 월 발송 10,000건, 이메일 + 카카오톡 채널, 기본 분석 대시보드", buttonText: "무료 체험 시작", isPopular: false },
+            { name: "프로 마케터", price: "₩149,000", period: "월", features: "무제한 AI 캠페인, 월 발송 100,000건, 옴니채널 통합(SMS 포함), 고급 세그먼트 + A/B 테스트, 우선 지원", buttonText: "가장 인기 있는 플랜", isPopular: true },
+            { name: "엔터프라이즈", price: "맞춤 견적", period: "연", features: "발송량 무제한, 전담 어카운트 매니저, 커스텀 API + 온프레미스 옵션, SLA 99.99% 보장", buttonText: "도입 상담 요청", isPopular: false }
+          ]
+        }
+      },
+      {
+        component: "FAQ_Accordion",
+        props: {
+          sectionTitle: "자주 묻는 질문",
+          faqs: [
+            { question: "기존 마케팅 툴과 연동이 가능한가요?", answer: "네, Google Analytics, HubSpot, Mailchimp, 카카오 비즈메시지 등 200개 이상의 툴과 즉시 연동됩니다." },
+            { question: "데이터 보안은 어떻게 관리되나요?", answer: "SOC 2 Type II 인증을 획득하였으며, 모든 데이터는 AES-256 암호화로 보호됩니다." },
+            { question: "무료 체험 후 자동 결제되나요?", answer: "아니요, 무료 체험은 신용카드 등록 없이 시작하며, 체험 종료 후 자동 결제되지 않습니다." }
+          ]
+        }
+      },
+      {
+        component: "Newsletter_CTA",
+        props: {
+          headline: "마케팅 인사이트를 가장 먼저 받아보세요",
+          subtitle: "매주 최신 AI 마케팅 트렌드, 성공 사례, 무료 템플릿을 이메일로 전달합니다. 3만 명의 마케터와 함께하세요.",
+          inputPlaceholder: "marketing@company.com",
+          buttonText: "무료 구독하기",
+          privacyNote: "스팸 없음 · 언제든 구독 취소 가능"
+        }
+      },
+      {
+        component: "Footer_Simple",
+        props: {
+          logoText: "GrowthEngine AI",
+          copyrightText: "© 2026 GrowthEngine AI Inc. All rights reserved.",
+          links: [
+            { label: "이용약관", url: "#" },
+            { label: "개인정보보호", url: "#" },
+            { label: "고객센터", url: "#" }
           ]
         }
       }

@@ -1613,6 +1613,321 @@ const COMPONENT_REGISTRY = {
         </div>
       `;
     }
+  },
+
+  Bento_Features: {
+    name: "벤토 그리드 기능 (Bento_Features)",
+    icon: "🧩",
+    defaultProps: {
+      sectionBadge: "핵심 기능",
+      sectionTitle: "모든 것이 하나로 연결됩니다",
+      sectionDesc: "복잡한 업무 흐름을 단순하게. 하나의 플랫폼에서 모든 것을 해결하세요.",
+      features: [
+        { title: "AI 자동화 엔진", desc: "자연어로 말하면 AI가 워크플로우를 자동 생성합니다. 200개 이상의 앱과 즉시 연동.", icon: "🤖", size: "large", gradient: "from-indigo-500 to-violet-500" },
+        { title: "실시간 대시보드", desc: "모든 KPI를 한눈에. 경영진 보고서도 자동 생성.", icon: "📊", size: "normal", gradient: "from-emerald-500 to-teal-400" },
+        { title: "팀 협업 허브", desc: "실시간 공동 편집, 코멘트, 알림까지 원스톱.", icon: "👥", size: "normal", gradient: "from-amber-500 to-orange-400" },
+        { title: "엔터프라이즈 보안", desc: "ISO 27001, SOC 2 인증. AES-256 암호화. 온프레미스 옵션.", icon: "🛡️", size: "normal", gradient: "from-rose-500 to-pink-400" },
+        { title: "글로벌 CDN", desc: "전 세계 48개 엣지에서 0.1초 이내 응답.", icon: "🌐", size: "normal", gradient: "from-blue-500 to-cyan-400" }
+      ]
+    },
+    schema: {
+      sectionBadge: { type: "text", label: "배지 텍스트" },
+      sectionTitle: { type: "text", label: "섹션 타이틀" },
+      sectionDesc: { type: "textarea", label: "섹션 설명" },
+      features: {
+        type: "array",
+        label: "기능 카드 목록",
+        itemSchema: {
+          title: { type: "text", label: "기능 제목" },
+          desc: { type: "textarea", label: "기능 설명" },
+          icon: { type: "text", label: "이모지 아이콘" },
+          size: { type: "select", label: "카드 크기", options: [{ value: "large", label: "대형 (2칸)" }, { value: "normal", label: "일반 (1칸)" }] },
+          gradient: { type: "text", label: "그라데이션" }
+        }
+      }
+    },
+    render(props) {
+      const items = props.features || [];
+      const cardsHtml = items.map((f, i) => {
+        const isLarge = f.size === "large";
+        return `
+          <div class="${isLarge ? 'md:col-span-2 md:row-span-2' : ''} group relative bg-white border border-slate-200/80 rounded-3xl p-8 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${f.gradient} opacity-5 rounded-full translate-x-10 -translate-y-10 group-hover:opacity-10 transition-opacity"></div>
+            <div class="relative z-10">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${f.gradient} flex items-center justify-center text-2xl shadow-lg mb-6 group-hover:scale-110 transition-transform">${f.icon}</div>
+              <h3 class="text-${isLarge ? '2xl' : 'lg'} font-extrabold text-slate-900 mb-3">${f.title}</h3>
+              <p class="text-slate-600 text-sm leading-relaxed ${isLarge ? 'max-w-md' : ''}">${f.desc}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <section class="py-20 md:py-28 px-6 bg-slate-50/30" id="features">
+          <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+              <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-xs font-bold text-indigo-600 mb-5">🧩 ${props.sectionBadge}</span>
+              <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">${props.sectionTitle}</h2>
+              <p class="text-slate-600 leading-relaxed">${props.sectionDesc}</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-auto">
+              ${cardsHtml}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+  },
+
+  Live_Activity_Feed: {
+    name: "실시간 활동 피드 (Live_Activity_Feed)",
+    icon: "📡",
+    defaultProps: {
+      bgColor: "bg-slate-900",
+      headline: "지금 이 순간에도 수많은 팀이 AutoWork를 사용하고 있습니다",
+      activities: [
+        { emoji: "🚀", text: "서울의 마케팅 팀이 새로운 캠페인 자동화를 생성했습니다", time: "방금 전" },
+        { emoji: "📊", text: "부산의 스타트업이 주간 보고서를 자동 발송했습니다", time: "2분 전" },
+        { emoji: "⚡", text: "대전의 개발팀이 CI/CD 파이프라인을 연동했습니다", time: "3분 전" },
+        { emoji: "🎯", text: "인천의 영업팀이 CRM 자동 동기화를 설정했습니다", time: "5분 전" },
+        { emoji: "💰", text: "제주의 이커머스 기업이 주문 처리 자동화를 도입했습니다", time: "7분 전" },
+        { emoji: "📈", text: "강남의 VC가 포트폴리오 보고서 자동화를 시작했습니다", time: "10분 전" }
+      ],
+      stats: [
+        { value: "47,392", label: "오늘 실행된 자동화" },
+        { value: "2,847", label: "활성 기업 수" },
+        { value: "98.7%", label: "실시간 성공률" }
+      ]
+    },
+    schema: {
+      bgColor: { type: "select", label: "배경색", options: [{ value: "bg-slate-900", label: "다크" }, { value: "bg-indigo-900", label: "인디고 다크" }] },
+      headline: { type: "text", label: "헤드라인" },
+      activities: {
+        type: "array",
+        label: "활동 피드 항목",
+        itemSchema: {
+          emoji: { type: "text", label: "이모지" },
+          text: { type: "text", label: "활동 내용" },
+          time: { type: "text", label: "시간 (예: 방금 전)" }
+        }
+      },
+      stats: {
+        type: "array",
+        label: "실시간 통계",
+        itemSchema: {
+          value: { type: "text", label: "숫자" },
+          label: { type: "text", label: "설명" }
+        }
+      }
+    },
+    render(props) {
+      const uid = 'laf_' + Math.random().toString(36).substr(2, 6);
+      const acts = props.activities || [];
+      const stats = props.stats || [];
+
+      const feedHtml = acts.map((a, i) => `
+        <div class="flex items-center gap-4 px-5 py-3.5 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/10 transition-all whitespace-nowrap flex-shrink-0">
+          <span class="text-lg">${a.emoji}</span>
+          <span class="text-white/80 text-sm font-medium">${a.text}</span>
+          <span class="text-white/30 text-xs font-semibold ml-auto">${a.time}</span>
+        </div>
+      `).join('');
+
+      const statsHtml = stats.map(s => `
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-extrabold text-white">${s.value}</div>
+          <div class="text-white/40 text-xs font-semibold mt-1">${s.label}</div>
+        </div>
+      `).join('');
+
+      return `
+        <section class="${props.bgColor || 'bg-slate-900'} py-14 px-6 relative overflow-hidden">
+          <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+          <div class="max-w-6xl mx-auto relative z-10">
+            <div class="flex items-center justify-center gap-3 mb-6">
+              <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span></span>
+              <p class="text-white/60 text-xs font-bold uppercase tracking-widest">${props.headline}</p>
+            </div>
+            
+            <div class="relative mb-8">
+              <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r ${props.bgColor === 'bg-indigo-900' ? 'from-indigo-900' : 'from-slate-900'} to-transparent z-10"></div>
+              <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l ${props.bgColor === 'bg-indigo-900' ? 'from-indigo-900' : 'from-slate-900'} to-transparent z-10"></div>
+              <div class="flex gap-4 animate-marquee">
+                ${feedHtml}
+                ${feedHtml}
+              </div>
+            </div>
+
+            <div class="flex justify-center gap-12 md:gap-20 pt-4 border-t border-white/10">
+              ${statsHtml}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+  },
+
+  Pricing_Toggle: {
+    name: "가격 토글 (Pricing_Toggle)",
+    icon: "💎",
+    defaultProps: {
+      sectionTitle: "단순하고 투명한 요금제",
+      sectionDesc: "숨겨진 비용 없이, 필요한 만큼만 지불하세요.",
+      annualDiscount: 20,
+      plans: [
+        {
+          name: "스타터",
+          monthlyPrice: "29,000",
+          features: "자동화 10개|월 5,000회 실행|기본 연동 (Slack, Discord)|이메일 지원|기본 대시보드",
+          buttonText: "무료 체험 시작 →",
+          isPopular: false,
+          icon: "🌱"
+        },
+        {
+          name: "프로",
+          monthlyPrice: "89,000",
+          features: "무제한 자동화|월 50,000회 실행|200+ 앱 전체 연동|AI 자연어 설계|24시간 우선 지원|고급 ROI 대시보드|팀 협업 기능",
+          buttonText: "가장 인기 있는 플랜 →",
+          isPopular: true,
+          icon: "⚡"
+        },
+        {
+          name: "엔터프라이즈",
+          monthlyPrice: "별도 문의",
+          features: "실행 횟수 무제한|온프레미스 구축|전담 어카운트 매니저|커스텀 API 통합|SLA 99.99%|보안 감사 리포트|MSA 계약",
+          buttonText: "도입 상담 요청 →",
+          isPopular: false,
+          icon: "🏢"
+        }
+      ],
+      guarantee: "30일 환불 보장 · 언제든 해지 가능 · 신용카드 없이 시작"
+    },
+    schema: {
+      sectionTitle: { type: "text", label: "섹션 타이틀" },
+      sectionDesc: { type: "textarea", label: "섹션 설명" },
+      annualDiscount: { type: "text", label: "연간 결제 할인율 (%)" },
+      guarantee: { type: "text", label: "하단 보증 문구" },
+      plans: {
+        type: "array",
+        label: "요금제 목록",
+        itemSchema: {
+          name: { type: "text", label: "플랜 이름" },
+          monthlyPrice: { type: "text", label: "월간 가격 (원, 숫자만)" },
+          features: { type: "textarea", label: "기능 목록 (|로 구분)" },
+          buttonText: { type: "text", label: "버튼 텍스트" },
+          isPopular: { type: "select", label: "추천 플랜", options: [{ value: "false", label: "보통" }, { value: "true", label: "추천" }] },
+          icon: { type: "text", label: "이모지 아이콘" }
+        }
+      }
+    },
+    render(props) {
+      const uid = 'pt_' + Math.random().toString(36).substr(2, 6);
+      const disc = parseInt(props.annualDiscount) || 20;
+      const plans = props.plans || [];
+
+      const cardsHtml = plans.map(p => {
+        const isPop = p.isPopular === "true" || p.isPopular === true;
+        const isCustom = isNaN(parseInt(p.monthlyPrice?.replace(/,/g, '')));
+        const monthNum = parseInt(p.monthlyPrice?.replace(/,/g, '')) || 0;
+        const annualMonthly = Math.round(monthNum * (100 - disc) / 100);
+        const savings = monthNum > 0 ? (monthNum - annualMonthly) * 12 : 0;
+
+        const featuresList = (p.features || "").split("|").map(f => f.trim()).filter(f => f).map(f => `
+          <li class="flex items-start gap-3 py-1.5">
+            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-slate-600 text-sm">${f}</span>
+          </li>
+        `).join('');
+
+        return `
+          <div class="relative bg-white rounded-3xl border-2 ${isPop ? 'border-indigo-600 shadow-xl shadow-indigo-100/50 md:-translate-y-4' : 'border-slate-200 shadow-sm'} p-8 flex flex-col">
+            ${isPop ? `<div class="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-xs font-bold rounded-full shadow-lg">가장 인기 · 추천 플랜</div>` : ''}
+            
+            <div class="flex items-center gap-3 mb-6">
+              <span class="text-2xl">${p.icon || '📦'}</span>
+              <h3 class="text-xl font-bold text-slate-900">${p.name}</h3>
+            </div>
+            
+            <div class="mb-6">
+              ${isCustom ? `
+                <div class="text-3xl font-extrabold text-slate-900">${p.monthlyPrice}</div>
+              ` : `
+                <div class="${uid}-monthly">
+                  <span class="text-4xl font-extrabold text-slate-900">₩${p.monthlyPrice}</span>
+                  <span class="text-slate-500 text-sm font-medium">/월</span>
+                </div>
+                <div class="${uid}-annual" style="display:none;">
+                  <span class="text-4xl font-extrabold text-slate-900">₩${annualMonthly.toLocaleString()}</span>
+                  <span class="text-slate-500 text-sm font-medium">/월</span>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="text-xs line-through text-slate-400">₩${p.monthlyPrice}/월</span>
+                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full">연 ₩${savings.toLocaleString()} 절약</span>
+                  </div>
+                </div>
+              `}
+            </div>
+
+            <ul class="space-y-1 mb-8 flex-grow">
+              ${featuresList}
+            </ul>
+
+            <button class="w-full py-4 px-6 rounded-2xl font-bold text-center text-sm transition-all ${isPop ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:shadow-lg hover:shadow-indigo-200 hover:scale-[1.02]' : 'bg-slate-50 text-indigo-600 hover:bg-indigo-50 border border-slate-200'} active:scale-98">
+              ${p.buttonText}
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <section class="py-20 md:py-28 px-6 bg-white" id="pricing">
+          <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+              <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">${props.sectionTitle}</h2>
+              <p class="text-slate-600 leading-relaxed mb-8">${props.sectionDesc}</p>
+              
+              <!-- Toggle -->
+              <div class="inline-flex items-center gap-4 p-1.5 bg-slate-100 rounded-2xl" id="${uid}-toggle">
+                <button class="${uid}-toggle-btn active px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-white text-slate-900 shadow-sm" data-period="monthly" onclick="${uid}_switch('monthly')">월간 결제</button>
+                <button class="${uid}-toggle-btn px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-slate-700" data-period="annual" onclick="${uid}_switch('annual')">
+                  연간 결제 <span class="ml-1 px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[10px] font-extrabold rounded-full">${disc}% 할인</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mt-10">
+              ${cardsHtml}
+            </div>
+            
+            <p class="text-center text-sm text-slate-400 mt-10 flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              ${props.guarantee}
+            </p>
+          </div>
+
+          <script>
+            window.${uid}_switch = function(period) {
+              var btns = document.querySelectorAll('.${uid}-toggle-btn');
+              btns.forEach(function(b) {
+                if (b.dataset.period === period) {
+                  b.classList.add('active');
+                  b.className = b.className.replace('text-slate-500', 'text-slate-900').replace('hover:text-slate-700', '');
+                  b.style.background = 'white';
+                  b.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+                } else {
+                  b.classList.remove('active');
+                  b.style.background = 'transparent';
+                  b.style.boxShadow = 'none';
+                }
+              });
+              var monthlies = document.querySelectorAll('.${uid}-monthly');
+              var annuals = document.querySelectorAll('.${uid}-annual');
+              monthlies.forEach(function(m) { m.style.display = period === 'monthly' ? 'block' : 'none'; });
+              annuals.forEach(function(a) { a.style.display = period === 'annual' ? 'block' : 'none'; });
+            };
+          </script>
+        </section>
+      `;
+    }
   }
 };
 

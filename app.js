@@ -981,6 +981,212 @@ const COMPONENT_REGISTRY = {
         </section>
       `;
     }
+  },
+
+  Card_News_Carousel: {
+    name: "카드뉴스 캐러셀 (Card_News_Carousel)",
+    icon: "📰",
+    defaultProps: {
+      sectionBadge: "왜 AutoWork인가?",
+      sectionTitle: "이런 불편함, 더 이상 겪지 마세요",
+      sectionDesc: "많은 팀들이 겪고 있는 업무 비효율의 원인과 해결책을 카드뉴스로 확인하세요.",
+      autoPlaySpeed: 5000,
+      ctaUrl: "#pricing",
+      cards: [
+        {
+          painIcon: "😩",
+          painTitle: "매일 같은 복사-붙여넣기 반복",
+          painDesc: "엑셀에서 데이터 복사하고, 이메일 보내고, 보고서에 다시 붙여넣고... 하루의 절반이 단순 반복 작업에 사라집니다.",
+          solveIcon: "🤖",
+          solveTitle: "AI가 자동으로 처리합니다",
+          solveDesc: "데이터 수집 → 가공 → 전달까지 원클릭 자동화. 3시간 걸리던 작업이 3분으로 단축됩니다.",
+          ctaText: "자동화 체험하기 →",
+          gradient: "from-rose-500 to-orange-400"
+        },
+        {
+          painIcon: "📊",
+          painTitle: "보고서를 만드는 데만 반나절",
+          painDesc: "여러 부서의 데이터를 모아서 차트를 그리고 포맷을 맞추는 데 매주 6시간 이상 소비하고 있다면?",
+          solveIcon: "📈",
+          solveTitle: "실시간 대시보드 자동 생성",
+          solveDesc: "연동된 데이터 소스에서 자동으로 시각화 리포트가 생성됩니다. 항상 최신 상태, 클릭 한 번으로 공유.",
+          ctaText: "대시보드 데모 보기 →",
+          gradient: "from-blue-500 to-cyan-400"
+        },
+        {
+          painIcon: "🤯",
+          painTitle: "팀원마다 다른 방식, 실수 반복",
+          painDesc: "인수인계가 안 되고, 매번 사람마다 다르게 처리하다 실수와 누락이 반복됩니다. 표준화가 절실합니다.",
+          solveIcon: "✅",
+          solveTitle: "워크플로우 표준화 완성",
+          solveDesc: "드래그 앤 드롭으로 표준 업무 프로세스를 설계하세요. 누가 해도 동일한 품질과 속도로 처리됩니다.",
+          ctaText: "프로세스 설계 시작 →",
+          gradient: "from-violet-500 to-purple-400"
+        },
+        {
+          painIcon: "⏰",
+          painTitle: "고객 응대가 항상 늦어요",
+          painDesc: "고객 문의가 밀리고, 응대 시간이 길어지면서 고객 만족도와 재구매율이 계속 떨어집니다.",
+          solveIcon: "⚡",
+          solveTitle: "AI 챗봇 즉시 응답 시스템",
+          solveDesc: "24시간 AI가 즉시 응답하고, 복잡한 건만 담당자에게 자동 에스컬레이션. 응대 만족도 95% 달성.",
+          ctaText: "AI 챗봇 도입하기 →",
+          gradient: "from-emerald-500 to-teal-400"
+        },
+        {
+          painIcon: "💸",
+          painTitle: "마케팅 예산, 어디로 새는 거죠?",
+          painDesc: "광고비를 쓰고 있지만 어떤 채널이 효과적인지 모르겠고, ROI 측정은 항상 후순위입니다.",
+          solveIcon: "🎯",
+          solveTitle: "채널별 ROAS 실시간 추적",
+          solveDesc: "모든 마케팅 터치포인트의 성과를 실시간 추적하고, AI가 예산 재분배를 자동으로 추천합니다.",
+          ctaText: "ROAS 분석 시작 →",
+          gradient: "from-amber-500 to-yellow-400"
+        }
+      ]
+    },
+    schema: {
+      sectionBadge: { type: "text", label: "배지 텍스트" },
+      sectionTitle: { type: "text", label: "섹션 타이틀" },
+      sectionDesc: { type: "textarea", label: "섹션 설명" },
+      autoPlaySpeed: { type: "text", label: "자동 재생 속도 (ms)" },
+      ctaUrl: { type: "text", label: "CTA 버튼 링크" },
+      cards: {
+        type: "array",
+        label: "카드 목록",
+        itemSchema: {
+          painIcon: { type: "text", label: "문제 이모지" },
+          painTitle: { type: "text", label: "문제 제목" },
+          painDesc: { type: "textarea", label: "문제 설명" },
+          solveIcon: { type: "text", label: "해결 이모지" },
+          solveTitle: { type: "text", label: "해결 제목" },
+          solveDesc: { type: "textarea", label: "해결 설명" },
+          ctaText: { type: "text", label: "CTA 버튼 텍스트" },
+          gradient: { type: "text", label: "그라데이션 (from-색상 to-색상)" }
+        }
+      }
+    },
+    render(props) {
+      const uid = 'cn_' + Math.random().toString(36).substr(2, 6);
+      const cards = props.cards || [];
+      const speed = parseInt(props.autoPlaySpeed) || 5000;
+
+      const cardsHtml = cards.map((c, i) => `
+        <div class="cn-card flex-shrink-0 w-full px-4" data-index="${i}" style="min-width:100%;">
+          <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-shadow duration-300" style="max-width:800px; margin:0 auto;">
+            <!-- Pain Point Section -->
+            <div class="bg-gradient-to-r ${c.gradient} p-8 md:p-10 text-white relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+              <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+              <div class="relative z-10">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-bold backdrop-blur-sm">😫 불편함 #${i+1}</span>
+                </div>
+                <div class="text-4xl mb-4">${c.painIcon}</div>
+                <h3 class="text-xl md:text-2xl font-extrabold mb-3 leading-tight">${c.painTitle}</h3>
+                <p class="text-white/85 text-sm md:text-base leading-relaxed font-light">${c.painDesc}</p>
+              </div>
+            </div>
+            <!-- Arrow Divider -->
+            <div class="flex justify-center -mt-4 relative z-20">
+              <div class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-slate-100">
+                <span class="text-lg">⬇️</span>
+              </div>
+            </div>
+            <!-- Solution Section -->
+            <div class="p-8 md:p-10 -mt-4">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold">✅ 해결</span>
+              </div>
+              <div class="text-4xl mb-4">${c.solveIcon}</div>
+              <h3 class="text-xl md:text-2xl font-extrabold text-slate-900 mb-3 leading-tight">${c.solveTitle}</h3>
+              <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">${c.solveDesc}</p>
+              <a href="${props.ctaUrl || '#'}" class="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r ${c.gradient} text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-100 transition-all duration-200 text-sm">
+                ${c.ctaText}
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      const dotsHtml = cards.map((_, i) => `
+        <button class="cn-dot w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === 0 ? 'bg-indigo-500 w-8' : 'bg-slate-300 hover:bg-slate-400'}" data-slide="${i}" onclick="document.getElementById('${uid}').dataset.goto='${i}'; (${uid}_go)(${i});"></button>
+      `).join('');
+
+      return `
+        <section class="py-20 md:py-28 px-6 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden" id="${uid}-section">
+          <!-- Background decoration -->
+          <div class="absolute top-20 left-10 w-64 h-64 bg-indigo-100/40 rounded-full blur-[80px]"></div>
+          <div class="absolute bottom-20 right-10 w-80 h-80 bg-violet-100/30 rounded-full blur-[100px]"></div>
+
+          <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-14">
+              <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-xs font-bold text-indigo-600 mb-5">📰 ${props.sectionBadge}</span>
+              <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">${props.sectionTitle}</h2>
+              <p class="text-slate-500 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">${props.sectionDesc}</p>
+            </div>
+
+            <!-- Carousel Container -->
+            <div class="relative" id="${uid}">
+              <div class="overflow-hidden rounded-2xl">
+                <div class="cn-track flex transition-transform duration-500 ease-out" id="${uid}-track" style="transform: translateX(0%);">
+                  ${cardsHtml}
+                </div>
+              </div>
+
+              <!-- Navigation Arrows -->
+              <button onclick="(${uid}_go)((parseInt(document.getElementById('${uid}').dataset.current||'0')-1+${cards.length})%${cards.length})" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 md:-translate-x-5 w-12 h-12 bg-white/90 backdrop-blur rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:bg-white hover:text-indigo-600 hover:scale-110 transition-all border border-slate-100 z-20">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button onclick="(${uid}_go)((parseInt(document.getElementById('${uid}').dataset.current||'0')+1)%${cards.length})" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 md:translate-x-5 w-12 h-12 bg-white/90 backdrop-blur rounded-full shadow-lg flex items-center justify-center text-slate-600 hover:bg-white hover:text-indigo-600 hover:scale-110 transition-all border border-slate-100 z-20">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+
+              <!-- Dots + Counter -->
+              <div class="flex items-center justify-center gap-3 mt-8">
+                <div class="flex items-center gap-2" id="${uid}-dots">
+                  ${dotsHtml}
+                </div>
+                <span class="text-xs font-semibold text-slate-400 ml-2" id="${uid}-counter">1 / ${cards.length}</span>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            (function() {
+              var current = 0;
+              var total = ${cards.length};
+              var el = document.getElementById('${uid}');
+              if (!el) return;
+              el.dataset.current = '0';
+
+              window.${uid}_go = function(idx) {
+                current = ((idx % total) + total) % total;
+                el.dataset.current = current;
+                var track = document.getElementById('${uid}-track');
+                if (track) track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                var dots = document.querySelectorAll('#${uid}-dots .cn-dot');
+                dots.forEach(function(d, i) {
+                  if (i === current) { d.className = 'cn-dot w-8 h-2.5 rounded-full transition-all duration-300 bg-indigo-500'; }
+                  else { d.className = 'cn-dot w-2.5 h-2.5 rounded-full transition-all duration-300 bg-slate-300 hover:bg-slate-400'; }
+                });
+                var counter = document.getElementById('${uid}-counter');
+                if (counter) counter.textContent = (current + 1) + ' / ' + total;
+              };
+
+              var autoTimer = setInterval(function() {
+                ${uid}_go(current + 1);
+              }, ${speed});
+
+              el.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
+              el.addEventListener('mouseleave', function() {
+                autoTimer = setInterval(function() { ${uid}_go(current + 1); }, ${speed});
+              });
+            })();
+          </script>
+        </section>
+      `;
+    }
   }
 };
 
@@ -1172,6 +1378,68 @@ const PRESET_TEMPLATES = {
           secondaryButtonText: "제품 데모 보기",
           gradientFrom: "from-violet-950",
           gradientTo: "to-slate-900"
+        }
+      },
+      {
+        component: "Card_News_Carousel",
+        props: {
+          sectionBadge: "왜 GrowthEngine인가?",
+          sectionTitle: "이런 불편함, 더 이상 겪지 마세요",
+          sectionDesc: "많은 마케팅 팀이 겪고 있는 비효율의 원인과 GrowthEngine의 해결책을 카드뉴스로 확인하세요.",
+          autoPlaySpeed: 5000,
+          ctaUrl: "#pricing",
+          cards: [
+            {
+              painIcon: "😩",
+              painTitle: "캠페인 기획에만 2주가 걸려요",
+              painDesc: "타겟 설정, 크리에이티브 제작, 채널 배분까지... 하나의 캠페인을 기획하는 데 너무 많은 시간과 리소스가 소모됩니다.",
+              solveIcon: "🚀",
+              solveTitle: "AI가 15분 만에 캠페인 완성",
+              solveDesc: "목표만 입력하면 AI가 타겟 세그먼트, 메시지, 최적 채널까지 자동으로 추천하고 실행합니다.",
+              ctaText: "캠페인 자동화 체험 →",
+              gradient: "from-rose-500 to-orange-400"
+            },
+            {
+              painIcon: "📊",
+              painTitle: "어떤 광고가 효과적인지 모르겠어요",
+              painDesc: "광고비는 나가는데 어떤 채널, 어떤 메시지가 실제 매출로 이어지는지 파악이 어렵습니다.",
+              solveIcon: "🎯",
+              solveTitle: "채널별 ROAS 실시간 추적",
+              solveDesc: "모든 터치포인트의 성과를 실시간으로 추적하고, AI가 예산 재분배를 자동으로 추천합니다.",
+              ctaText: "ROAS 대시보드 보기 →",
+              gradient: "from-blue-500 to-cyan-400"
+            },
+            {
+              painIcon: "🤯",
+              painTitle: "고객이 이탈하는데 원인을 모르겠어요",
+              painDesc: "가입은 했지만 활성화되지 않는 유저, 구매 후 재방문하지 않는 고객... 이탈 패턴을 파악할 수 없습니다.",
+              solveIcon: "🔮",
+              solveTitle: "AI 이탈 예측 & 자동 리텐션",
+              solveDesc: "이탈 확률 90%인 고객을 사전에 식별하고, 맞춤 리텐션 메시지를 자동으로 발송합니다.",
+              ctaText: "이탈 방지 시스템 도입 →",
+              gradient: "from-violet-500 to-purple-400"
+            },
+            {
+              painIcon: "⏰",
+              painTitle: "A/B 테스트 결과를 기다리느라 지쳐요",
+              painDesc: "수동으로 실험을 설계하고 2주를 기다려 결과를 분석... 시장은 빠르게 변하는데 속도가 따라가지 못합니다.",
+              solveIcon: "⚡",
+              solveTitle: "AI 멀티 실험 자동 최적화",
+              solveDesc: "동시에 10개 이상의 실험을 자동 실행하고, 통계적으로 유의미한 승자를 실시간으로 적용합니다.",
+              ctaText: "자동 최적화 시작 →",
+              gradient: "from-emerald-500 to-teal-400"
+            },
+            {
+              painIcon: "💸",
+              painTitle: "개인화 메시지를 보내고 싶은데 인력이 부족해요",
+              painDesc: "고객마다 다른 메시지를 보내야 하는 건 알지만, 수천 명의 고객을 일일이 관리할 인력이 없습니다.",
+              solveIcon: "🤖",
+              solveTitle: "AI 초개인화 메시징 엔진",
+              solveDesc: "고객의 행동 데이터를 기반으로 1:1 맞춤 메시지를 자동 생성하고 최적 시점에 발송합니다.",
+              ctaText: "개인화 메시징 체험 →",
+              gradient: "from-amber-500 to-yellow-400"
+            }
+          ]
         }
       },
       {
